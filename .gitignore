@@ -25,3 +25,6 @@ dist-ssr
 /scratch
 scratch/
 .vercel
+*.zip
+public/debug_screens/
+public/client-assets/*.zip
