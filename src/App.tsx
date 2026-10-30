@@ -10,7 +10,7 @@ import { PortfolioLookbook } from './components/PortfolioLookbook';
 import { EcoQualityStandards } from './components/EcoQualityStandards';
 import { ContactLocation } from './components/ContactLocation';
 import { Footer } from './components/Footer';
-import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { AIChatBot } from './components/AIChatBot';
 import { TechPackRFQModal } from './components/TechPackRFQModal';
 import { LightboxModal } from './components/LightboxModal';
 
@@ -119,8 +119,11 @@ export const App: React.FC = () => {
         onOpenRFQ={() => setIsRFQOpen(true)}
       />
 
-      {/* Persistent Direct WhatsApp Link */}
-      <FloatingWhatsApp currentLang={currentLang} />
+      {/* Executive Industrial AI Concierge & Chatbot */}
+      <AIChatBot 
+        currentLang={currentLang} 
+        onOpenRFQ={() => setIsRFQOpen(true)} 
+      />
 
       {/* Interactive 3-Step Tech-Pack RFQ Modal */}
       <TechPackRFQModal
