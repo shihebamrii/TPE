@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowUpRight, Phone, MessageSquare } from 'lucide-react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
@@ -11,21 +11,66 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ currentLang, onLanguageChange, onOpenRFQ }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState<string>('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const t = translations[currentLang].nav;
 
   useEffect(() => {
-    const handleScroll = () => {
-      // 1. Navbar elevation threshold
-      setIsScrolled(window.scrollY > 15);
+    let currentProgress = 0;
+    let targetProgress = 0;
+    let rafId: number | null = null;
+    let isMounted = true;
 
-      // 2. Reading progress (0 to 100%)
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Physics-smoothed animation frame loop (lerp)
+    // Eliminates notched mouse-wheel stepping and CSS layout reflow
+    const updateSmoothProgress = () => {
+      if (!isMounted) return;
+
+      const diff = targetProgress - currentProgress;
+
+      if (Math.abs(diff) > 0.0001 && !prefersReducedMotion) {
+        // 0.18 dampening factor gives instantaneous response with liquid deceleration
+        currentProgress += diff * 0.18;
+        if (progressBarRef.current) {
+          progressBarRef.current.style.transform = `translate3d(${(currentProgress - 1) * 100}%, 0, 0)`;
+        }
+        rafId = requestAnimationFrame(updateSmoothProgress);
+      } else {
+        currentProgress = targetProgress;
+        if (progressBarRef.current) {
+          progressBarRef.current.style.transform = `translate3d(${(currentProgress - 1) * 100}%, 0, 0)`;
+        }
+        rafId = null;
+      }
+    };
+
+    const handleScroll = (immediate = false) => {
+      // 1. Navbar elevation threshold
+      const scrolled = window.scrollY > 15;
+      setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
+
+      // 2. Hardware-accelerated Reading Progress (0 to 1)
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight > 0) {
-        const progress = Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100));
-        setScrollProgress(progress);
+        targetProgress = Math.min(1, Math.max(0, window.scrollY / docHeight));
+        if (immediate || prefersReducedMotion) {
+          currentProgress = targetProgress;
+          if (progressBarRef.current) {
+            progressBarRef.current.style.transform = `translate3d(${(currentProgress - 1) * 100}%, 0, 0)`;
+          }
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+        } else if (!rafId) {
+          rafId = requestAnimationFrame(updateSmoothProgress);
+        }
       }
 
       // 3. Active Section Detection
@@ -37,16 +82,26 @@ export const Navbar: React.FC<NavbarProps> = ({ currentLang, onLanguageChange, o
         if (el) {
           const top = el.offsetTop;
           if (scrollPos >= top) {
-            setActiveSection(sectionIds[i]);
+            setActiveSection((prev) => (prev !== sectionIds[i] ? sectionIds[i] : prev));
             break;
           }
         }
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => handleScroll(false);
+    const onResize = () => handleScroll(true);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    handleScroll(true);
+
+    return () => {
+      isMounted = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+    };
   }, []);
 
   const navLinks = [
@@ -237,12 +292,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentLang, onLanguageChange, o
         </div>
       )}
 
-      {/* Subtle 2px CMYK Scroll Progress Line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-slate-100/80 overflow-hidden pointer-events-none">
+      {/* Ultra-Smooth CMYK Scroll Progress Ribbon */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-slate-100/90 overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
         <div
-          className="h-full bg-gradient-to-r from-tpe-cyan via-tpe-magenta via-tpe-yellow to-tpe-red transition-all duration-150 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
+          ref={progressBarRef}
+          className="relative h-full w-full bg-gradient-to-r from-tpe-cyan via-tpe-magenta via-tpe-yellow to-tpe-red will-change-transform"
+          style={{ transform: 'translate3d(-100%, 0, 0)' }}
+        >
+          {/* Luminous leading-edge tip for fluid visual feedback */}
+          <span className="absolute right-0 top-1/2 -translate-y-1/2 w-3.5 h-[3px] rounded-full bg-white/90 shadow-[0_0_6px_rgba(255,255,255,0.9),0_0_10px_rgba(225,29,72,0.8)]" />
+        </div>
       </div>
     </header>
   );
