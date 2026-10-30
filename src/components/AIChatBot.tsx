@@ -398,53 +398,55 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
           <ArrowUp className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
         </button>
 
-        {/* 2. Bespoke Luxury Chatbot Trigger Button */}
+        {/* 2. Bespoke Luxury Chatbot Trigger Button (Light Mode) */}
         <div className="relative pointer-events-auto flex items-center">
           
           {/* Unread Teaser Notification Pill (Displays when closed) */}
           {!isOpen && hasUnreadPrompt && (
             <div 
               onClick={() => setIsOpen(true)}
-              className="mr-3 cursor-pointer hidden md:flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-[#0A0E17]/95 border border-slate-700/80 text-white shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-right-4 duration-300 hover:scale-102 transition-transform group"
+              className="mr-3 cursor-pointer hidden md:flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white/95 border border-slate-200/90 text-slate-900 shadow-xl backdrop-blur-md animate-in fade-in slide-in-from-right-4 duration-300 hover:scale-102 transition-transform group"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
               <div className="flex flex-col text-left">
-                <span className="text-[11px] font-mono font-bold text-white flex items-center gap-1">
+                <span className="text-[11px] font-mono font-bold text-slate-900 flex items-center gap-1">
                   <span>{currentLang === 'fr' ? 'Concierge Usine IA' : 'Factory AI Concierge'}</span>
                   <span className="text-tpe-red text-[9px] font-bold">24/7</span>
                 </span>
-                <span className="text-[10px] text-slate-400 font-sans">
+                <span className="text-[10px] text-slate-500 font-sans">
                   {currentLang === 'fr' ? 'Cadences, devis & conseils techniques' : 'Capacities, quotes & technical advice'}
                 </span>
               </div>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-white transition-colors" />
+              <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-800 transition-colors" />
             </div>
           )}
 
           {/* Launcher Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`relative flex items-center justify-center w-14 h-14 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group overflow-hidden ${
+            className={`relative flex items-center justify-center w-14 h-14 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group overflow-hidden ${
               isOpen
-                ? 'bg-slate-900 text-white border border-slate-700 rotate-90'
-                : 'bg-gradient-to-br from-[#0A0E17] via-[#141B2D] to-[#0A0E17] text-white border border-slate-700/80 shadow-[0_10px_25px_rgba(0,0,0,0.5)]'
+                ? 'bg-slate-950 text-white border border-slate-800 rotate-90'
+                : 'bg-white text-slate-900 border border-slate-200/90 shadow-[0_10px_30px_rgba(0,0,0,0.12)]'
             }`}
             aria-label={isOpen ? 'Fermer le chat' : 'Ouvrir le chat technique'}
           >
-            {/* CMYK Signature Glow Rim */}
+            {/* CMYK Signature Rim */}
             <div className="absolute inset-0 rounded-full opacity-60 group-hover:opacity-100 transition-opacity p-[1.5px] bg-gradient-to-tr from-tpe-cyan via-tpe-magenta via-tpe-yellow to-tpe-red pointer-events-none" />
 
             {/* Icon Inside */}
-            <div className="relative z-10 flex items-center justify-center w-full h-full bg-[#0A0E17] rounded-full">
+            <div className={`relative z-10 flex items-center justify-center w-full h-full rounded-full transition-colors ${
+              isOpen ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'
+            }`}>
               {isOpen ? (
                 <X className="w-5 h-5 text-white" />
               ) : (
                 <div className="relative">
-                  <Bot className="w-6 h-6 text-white group-hover:text-tpe-cyan transition-colors" />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#0A0E17]" />
+                  <Bot className="w-6 h-6 text-slate-900 group-hover:text-tpe-red transition-colors" />
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white" />
                 </div>
               )}
             </div>
@@ -454,10 +456,10 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
 
       </div>
 
-      {/* 3. Luxury Chat Window Modal */}
+      {/* 3. Luxury Chat Window Modal (Light Mode) */}
       {isOpen && (
         <div
-          className={`fixed z-50 bg-[#0A0E17]/95 backdrop-blur-2xl border border-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.7)] flex flex-col transition-all duration-300 animate-in fade-in zoom-in-95 origin-bottom-right ${
+          className={`fixed z-50 bg-white/98 backdrop-blur-2xl border border-slate-200/90 shadow-[0_20px_60px_rgba(0,0,0,0.15),0_4px_16px_rgba(0,0,0,0.06)] flex flex-col transition-all duration-300 animate-in fade-in zoom-in-95 origin-bottom-right ${
             isExpanded
               ? 'inset-3 sm:inset-6 md:inset-auto md:bottom-6 md:right-6 md:w-[620px] md:h-[82vh] rounded-2xl'
               : 'bottom-20 right-3 left-3 sm:left-auto sm:right-6 w-auto sm:w-[410px] md:w-[440px] h-[560px] max-h-[82vh] rounded-2xl'
@@ -472,40 +474,40 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
           </div>
 
           {/* Window Header */}
-          <div className="px-3.5 sm:px-4 py-3 border-b border-slate-800/80 flex items-center justify-between shrink-0 bg-white/[0.02]">
+          <div className="px-3.5 sm:px-4 py-3 border-b border-slate-200 bg-slate-50/80 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
               <div className="relative shrink-0">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 p-1.5 flex items-center justify-center shadow-xs">
-                  <Bot className="w-5 h-5 text-tpe-cyan" />
+                <div className="w-9 h-9 rounded-xl bg-white border border-slate-200/90 shadow-2xs p-1.5 flex items-center justify-center">
+                  <Bot className="w-5 h-5 text-tpe-red" />
                 </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#0A0E17]" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white" />
               </div>
 
               <div className="flex flex-col min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <span className="font-mono text-[11px] sm:text-xs font-bold text-white uppercase tracking-wider truncate">
+                  <span className="font-mono text-[11px] sm:text-xs font-bold text-slate-900 uppercase tracking-wider truncate">
                     {currentLang === 'fr' ? 'TPE Concierge Atelier' : 'TPE Factory Concierge'}
                   </span>
-                  <span className="px-1.5 py-0.2 bg-emerald-500/20 text-emerald-400 text-[8.5px] sm:text-[9px] font-mono font-bold rounded-xs border border-emerald-500/30 shrink-0">
+                  <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 text-[8.5px] sm:text-[9px] font-mono font-bold rounded-xs border border-emerald-200/80 shrink-0">
                     LIVE
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[9.5px] sm:text-[10px] font-mono text-slate-400 whitespace-nowrap">
+                <div className="flex items-center gap-1.5 text-[9.5px] sm:text-[10px] font-mono text-slate-500 whitespace-nowrap">
                   <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-slate-500 shrink-0" />
-                    <span>Ras Jebel: <strong className="text-slate-300">{factoryTime || 'UTC+1'}</strong></span>
+                    <Clock className="w-3 h-3 text-slate-400 shrink-0" />
+                    <span>Ras Jebel: <strong className="text-slate-700">{factoryTime || 'UTC+1'}</strong></span>
                   </span>
                   <span>•</span>
-                  <span className="text-emerald-400 font-semibold">Active</span>
+                  <span className="text-emerald-600 font-semibold">Active</span>
                 </div>
               </div>
             </div>
 
             {/* Action Icons in Header */}
-            <div className="flex items-center gap-0.5 sm:gap-1 text-slate-400 shrink-0">
+            <div className="flex items-center gap-0.5 sm:gap-1 text-slate-500 shrink-0">
               <button
                 onClick={() => setIsMuted(!isMuted)}
-                className="p-1.5 hover:text-white hover:bg-white/5 rounded-md transition-colors"
+                className="p-1.5 hover:text-slate-900 hover:bg-slate-200/60 rounded-md transition-colors"
                 title={isMuted ? 'Activer le son' : 'Couper le son'}
               >
                 {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -513,7 +515,7 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
 
               <button
                 onClick={handleResetChat}
-                className="p-1.5 hover:text-white hover:bg-white/5 rounded-md transition-colors"
+                className="p-1.5 hover:text-slate-900 hover:bg-slate-200/60 rounded-md transition-colors"
                 title={currentLang === 'fr' ? 'Réinitialiser la conversation' : 'Reset chat'}
               >
                 <RefreshCw className="w-3.5 h-3.5" />
@@ -521,7 +523,7 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
 
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="hidden md:inline-flex p-1.5 hover:text-white hover:bg-white/5 rounded-md transition-colors"
+                className="hidden md:inline-flex p-1.5 hover:text-slate-900 hover:bg-slate-200/60 rounded-md transition-colors"
                 title={isExpanded ? 'Réduire' : 'Agrandir'}
               >
                 {isExpanded ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
@@ -529,7 +531,7 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 hover:text-white hover:bg-white/5 rounded-md transition-colors"
+                className="p-1.5 hover:text-slate-900 hover:bg-slate-200/60 rounded-md transition-colors"
                 title={currentLang === 'fr' ? 'Fermer' : 'Close'}
               >
                 <X className="w-4 h-4" />
@@ -538,21 +540,21 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
           </div>
 
           {/* Quick Notice Pill in Header */}
-          <div className="px-3.5 sm:px-4 py-1.5 bg-emerald-950/20 border-b border-emerald-900/30 flex items-center justify-between text-[10px] sm:text-[10.5px] font-mono text-emerald-400 shrink-0">
+          <div className="px-3.5 sm:px-4 py-1.5 bg-emerald-50/90 border-b border-emerald-100 flex items-center justify-between text-[10px] sm:text-[10.5px] font-mono text-emerald-800 shrink-0">
             <span className="flex items-center gap-1.5 truncate">
-              <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
               <span className="truncate">Statut EUR.1 • 0% Douane vers l'UE</span>
             </span>
             <button
               onClick={onOpenRFQ}
-              className="text-white hover:text-tpe-red font-bold underline shrink-0 ml-2"
+              className="text-tpe-red hover:text-red-700 font-bold underline shrink-0 ml-2"
             >
               Devis 24h →
             </button>
           </div>
 
-          {/* Scrollable Messages Stream */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 font-sans text-xs custom-scrollbar">
+          {/* Scrollable Messages Stream (Light Mode) */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 font-sans text-xs custom-scrollbar bg-slate-50/30">
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -560,10 +562,10 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
               >
                 {/* Message Bubble */}
                 <div
-                  className={`max-w-[85%] sm:max-w-[82%] rounded-2xl p-3.5 leading-relaxed shadow-sm ${
+                  className={`max-w-[85%] sm:max-w-[82%] rounded-2xl p-3.5 leading-relaxed shadow-2xs ${
                     msg.sender === 'user'
-                      ? 'bg-gradient-to-r from-tpe-red to-rose-700 text-white rounded-tr-xs font-medium'
-                      : 'bg-slate-900/90 text-slate-200 border border-slate-800 rounded-tl-xs whitespace-pre-line'
+                      ? 'bg-gradient-to-r from-tpe-red to-red-700 text-white rounded-tr-xs font-medium'
+                      : 'bg-white text-slate-800 border border-slate-200 rounded-tl-xs whitespace-pre-line shadow-xs'
                   }`}
                 >
                   {/* Markdown formatting simulation */}
@@ -574,11 +576,11 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
                       // Bold formatting
                       const parts = line.split(/(\*\*.*?\*\*)/g);
                       return (
-                        <p key={lIdx} className={line.startsWith('•') ? 'pl-2 text-slate-300' : ''}>
+                        <p key={lIdx} className={line.startsWith('•') ? 'pl-2 text-slate-700' : ''}>
                           {parts.map((part, pIdx) => {
                             if (part.startsWith('**') && part.endsWith('**')) {
                               return (
-                                <strong key={pIdx} className="text-white font-bold">
+                                <strong key={pIdx} className={msg.sender === 'user' ? 'text-white font-bold' : 'text-slate-950 font-bold'}>
                                   {part.slice(2, -2)}
                                 </strong>
                               );
@@ -592,15 +594,15 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
 
                   {/* Interactive Action Pills */}
                   {msg.actions && msg.actions.length > 0 && (
-                    <div className="mt-3 pt-2.5 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+                    <div className="mt-3 pt-2.5 border-t border-slate-200 flex flex-wrap gap-1.5">
                       {msg.actions.map((act, actIdx) => (
                         <button
                           key={actIdx}
                           onClick={() => handleActionClick(act)}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-white/10 hover:bg-white/20 text-white text-[11px] font-mono font-bold transition-all hover:scale-102 active:scale-98"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200 hover:border-slate-300 text-[11px] font-mono font-bold transition-all hover:scale-102 active:scale-98 shadow-2xs"
                         >
                           <span>{act.label}</span>
-                          <ArrowUpRight className="w-3 h-3 text-slate-400" />
+                          <ArrowUpRight className="w-3 h-3 text-slate-500" />
                         </button>
                       ))}
                     </div>
@@ -608,7 +610,7 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
                 </div>
 
                 {/* Micro Timestamp */}
-                <span className="text-[9.5px] font-mono text-slate-500 mt-1 px-1">
+                <span className="text-[9.5px] font-mono text-slate-400 mt-1 px-1">
                   {msg.timestamp}
                 </span>
               </div>
@@ -616,8 +618,8 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
 
             {/* Typing Indicator */}
             {isTyping && (
-              <div className="flex items-center gap-2 text-slate-400 text-xs font-mono bg-slate-900/60 border border-slate-800 w-fit px-3 py-2 rounded-2xl rounded-tl-xs">
-                <Sparkles className="w-3.5 h-3.5 text-tpe-cyan animate-spin" />
+              <div className="flex items-center gap-2 text-slate-600 text-xs font-mono bg-white border border-slate-200 shadow-2xs w-fit px-3 py-2 rounded-2xl rounded-tl-xs">
+                <Sparkles className="w-3.5 h-3.5 text-tpe-red animate-spin" />
                 <span>Ingénieur TPE en train d'écrire</span>
                 <span className="flex gap-1 ml-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: '0ms' }} />
@@ -630,15 +632,15 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Suggested Quick Prompts Bar */}
-          <div className="px-3 py-2 bg-slate-950/60 border-t border-slate-800/80 overflow-x-auto no-scrollbar shrink-0">
+          {/* Suggested Quick Prompts Bar (Light Mode) */}
+          <div className="px-3 py-2 bg-slate-50/80 border-t border-slate-200 overflow-x-auto no-scrollbar shrink-0">
             <div className="flex items-center gap-1.5 w-max">
               {quickPrompts.map((prompt, pIdx) => (
                 <button
                   key={pIdx}
                   onClick={() => handleSendMessage(prompt)}
                   disabled={isTyping}
-                  className="px-2.5 py-1 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/5 hover:border-white/15 text-[10.5px] font-mono text-slate-300 hover:text-white transition-all whitespace-nowrap active:scale-95 disabled:opacity-50"
+                  className="px-2.5 py-1 rounded-full bg-white hover:bg-slate-100 border border-slate-200 hover:border-slate-300 text-[10.5px] font-mono text-slate-700 hover:text-slate-950 transition-all whitespace-nowrap active:scale-95 disabled:opacity-50 shadow-2xs"
                 >
                   {prompt}
                 </button>
@@ -646,8 +648,8 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
             </div>
           </div>
 
-          {/* Input Formulation Bar */}
-          <div className="p-3 border-t border-slate-800/80 bg-white/[0.01] shrink-0">
+          {/* Input Formulation Bar (Light Mode) */}
+          <div className="p-3 border-t border-slate-200 bg-white shrink-0">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -665,7 +667,7 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
                     ? 'Posez une question technique ou sur vos productions...'
                     : 'Ask about machinery, lead times, or quotes...'
                 }
-                className="flex-1 bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-tpe-magenta transition-colors font-sans"
+                className="flex-1 bg-slate-50 border border-slate-200 focus:bg-white focus:border-tpe-red focus:ring-1 focus:ring-tpe-red/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none transition-all font-sans"
               />
 
               <button
@@ -673,8 +675,8 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
                 disabled={!inputMessage.trim() || isTyping}
                 className={`p-2.5 rounded-xl font-bold transition-all flex items-center justify-center shrink-0 ${
                   inputMessage.trim() && !isTyping
-                    ? 'bg-tpe-red hover:bg-red-700 text-white shadow-md hover:scale-105 active:scale-95'
-                    : 'bg-slate-800 text-slate-600 cursor-not-allowed'
+                    ? 'bg-tpe-red hover:bg-red-700 text-white shadow-xs hover:scale-105 active:scale-95'
+                    : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                 }`}
                 aria-label="Envoyer"
               >
@@ -682,13 +684,13 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
               </button>
             </form>
 
-            <div className="mt-2 flex items-center justify-between text-[10px] font-mono text-slate-500 px-1">
+            <div className="mt-2 flex items-center justify-between text-[10px] font-mono text-slate-400 px-1">
               <span>IA Usine TPE • Ras Jebel Bizerte</span>
               <a
                 href="https://wa.me/21698761003"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-400 hover:underline flex items-center gap-1"
+                className="text-emerald-600 hover:underline flex items-center gap-1 font-semibold"
               >
                 <MessageSquare className="w-2.5 h-2.5" />
                 <span>WhatsApp Usine direct</span>
