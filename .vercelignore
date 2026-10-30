@@ -1,0 +1,9 @@
+node_modules
+dist
+scratch
+scratch/
+.git
+*.zip
+public/client-assets/*.zip
+public/client-assets/photos_2
+public/debug_screens
