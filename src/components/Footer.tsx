@@ -67,6 +67,40 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenRFQ }) => {
     { href: '#references', label: 'Accords NDA Donneurs d\'Ordres' },
   ];
 
+  const standardsBadges = [
+    {
+      name: 'Triple ISO',
+      sub: '9001 • 14001 • 45001',
+      logo: '/assets/logos/certifications/iso_9001.svg',
+      alt: 'Certification Triple ISO 9001 14001 45001',
+    },
+    {
+      name: currentLang === 'fr' ? 'GOTS Bio' : 'GOTS Organic',
+      sub: currentLang === 'fr' ? 'Coton Biologique' : 'Organic Cotton',
+      logo: '/assets/logos/certifications/gots.svg',
+      alt: 'Global Organic Textile Standard GOTS',
+    },
+    {
+      name: 'OEKO-TEX®',
+      sub: currentLang === 'fr' ? 'Standard 100 Classe I' : 'Standard 100 Class I',
+      logo: '/assets/logos/certifications/oeko_tex.svg',
+      alt: 'OEKO-TEX Standard 100',
+    },
+    {
+      name: 'GRS',
+      sub: currentLang === 'fr' ? 'Fibres Recyclées' : 'Recycled Standard',
+      logo: '/assets/logos/certifications/grs.png',
+      alt: 'Global Recycled Standard GRS',
+    },
+    {
+      name: currentLang === 'fr' ? 'Accord EUR.1' : 'EUR.1 Treaty',
+      sub: currentLang === 'fr' ? '0% Douane UE' : '0% EU Customs',
+      logo: '/assets/logos/certifications/eu_flag.svg',
+      alt: 'Accord EUR.1 Union Européenne',
+      highlight: true,
+    },
+  ];
+
   return (
     <footer className="bg-[#0A0E17] text-slate-300 pt-12 pb-10 relative overflow-hidden border-t border-slate-800">
       
@@ -203,21 +237,63 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenRFQ }) => {
 
         </div>
 
-        {/* 3. REFINED SINGLE-LINE ACCREDITATIONS & RSE STRIP */}
-        <div className="py-4 my-6 bg-white/[0.02] border border-white/5 rounded-sm px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-mono">
-          <div className="flex flex-wrap items-center gap-2 text-slate-400">
-            <span className="text-white font-bold uppercase tracking-wider flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Normes & Audits :</span>
-            </span>
-            <span className="text-slate-300">
-              Triple ISO 9001/14001/45001 • Coton Biologique GOTS • OEKO-TEX® Standard 100 • GRS • Accord EUR.1
-            </span>
+        {/* 3. REFINED ACCREDITATIONS & RSE STRIP WITH AUTHENTIC LOGOS */}
+        <div className="my-6 p-4 bg-white/[0.02] border border-white/5 rounded-sm space-y-3 font-mono">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2.5 border-b border-white/5">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span className="text-xs font-bold text-white uppercase tracking-wider">
+                {currentLang === 'fr' ? 'Normes & Audits :' : 'Standards & Audits :'}
+              </span>
+              <span className="text-[11px] text-slate-400 hidden md:inline">
+                {currentLang === 'fr'
+                  ? '• Conformité RSE & Cahiers des Charges Européens'
+                  : '• CSR Compliance & European Buyer Specs'}
+              </span>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-semibold bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-1 rounded-sm w-fit">
+              <span>✓</span>
+              <span>
+                {currentLang === 'fr'
+                  ? "Certificats & Rapports d'audit disponibles sous 24h"
+                  : 'Certificates & Audit reports available within 24h'}
+              </span>
+            </div>
           </div>
 
-          <span className="text-[11px] text-emerald-400 font-semibold shrink-0">
-            ✓ Certificats & Rapports d'audit disponibles sous 24h
-          </span>
+          {/* 5-item Micro-Badge Matrix with Authentic Logos */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-2.5">
+            {standardsBadges.map((badge, idx) => (
+              <a
+                key={idx}
+                href="#standards"
+                className="flex items-center gap-2.5 p-2 rounded-sm bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-white/20 transition-all group"
+                title={`${badge.name} - ${badge.sub}`}
+              >
+                <div className="w-8 h-8 rounded-xs bg-white p-1 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
+                  <img
+                    src={badge.logo}
+                    alt={badge.alt}
+                    className="max-h-full max-w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[11px] font-bold text-white group-hover:text-emerald-400 transition-colors truncate leading-tight">
+                    {badge.name}
+                  </span>
+                  <span
+                    className={`text-[9.5px] truncate leading-tight mt-0.5 ${
+                      badge.highlight ? 'text-emerald-400 font-semibold' : 'text-slate-400'
+                    }`}
+                  >
+                    {badge.sub}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* 4. EXECUTIVE LEGAL & BEACON BOTTOM STRIP */}
