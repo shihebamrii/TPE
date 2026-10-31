@@ -2,6 +2,7 @@ import React from 'react';
 import { ExternalLink, ArrowUpRight, Phone, Mail, MapPin, Clock, MessageSquare } from 'lucide-react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
+import { useSiteData } from '../context/SiteContext';
 import { ScrollReveal } from './common/ScrollReveal';
 
 interface ContactLocationProps {
@@ -11,6 +12,8 @@ interface ContactLocationProps {
 
 export const ContactLocation: React.FC<ContactLocationProps> = ({ currentLang, onOpenRFQ }) => {
   const t = translations[currentLang].contact;
+  const { data } = useSiteData();
+  const contact = data.contact;
 
   return (
     <section id="contact" className="py-24 bg-[#FAFAFB] border-t border-slate-200">
@@ -47,10 +50,10 @@ export const ContactLocation: React.FC<ContactLocationProps> = ({ currentLang, o
                 {t.addressTitle}
               </span>
               <p className="font-sans font-extrabold text-lg text-slate-950 leading-snug">
-                {t.addressText}
+                {contact.factoryAddress || t.addressText}
               </p>
               <a
-                href="https://www.google.com/maps/place/TPE+TUNISIE/@37.2189777,10.1179318,915m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12e2e98602f32867:0xd2378773985b40ff!8m2!3d37.2189777!4d10.1179318"
+                href={contact.mapsUrl || "https://www.google.com/maps/place/TPE+TUNISIE/@37.2189777,10.1179318,915m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12e2e98602f32867:0xd2378773985b40ff!8m2!3d37.2189777!4d10.1179318"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-mono uppercase text-tpe-magenta font-bold mt-2 hover:underline"
@@ -66,22 +69,22 @@ export const ContactLocation: React.FC<ContactLocationProps> = ({ currentLang, o
               </span>
               <div className="space-y-1.5">
                 <a
-                  href="tel:+21672457143"
+                  href={`tel:${contact.phoneStandard.replace(/\s+/g, '')}`}
                   className="font-sans font-bold text-base text-slate-950 hover:text-tpe-magenta transition-colors flex items-center gap-2"
                 >
                   <Phone className="w-4 h-4 text-slate-400" />
-                  <span>+216 72 457 143</span>
+                  <span>{contact.phoneStandard}</span>
                   <span className="text-xs font-mono text-slate-400 font-normal">(Standard)</span>
                 </a>
 
                 <a
-                  href="https://wa.me/21698761003"
+                  href={`https://wa.me/${contact.whatsappNumberOnly || contact.phoneWhatsapp.replace(/[^0-9]/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-sans font-black text-base text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-2"
                 >
                   <MessageSquare className="w-4 h-4 text-emerald-500" />
-                  <span>+216 98 761 003</span>
+                  <span>{contact.phoneWhatsapp}</span>
                   <span className="text-xs font-mono text-emerald-600 font-normal">(WhatsApp Commercial)</span>
                 </a>
               </div>
@@ -92,11 +95,11 @@ export const ContactLocation: React.FC<ContactLocationProps> = ({ currentLang, o
                 {t.emailsTitle}
               </span>
               <div className="space-y-1 font-mono text-xs">
-                <a href="mailto:contact@tpe-sa.com" className="text-slate-950 font-bold hover:text-tpe-magenta block">
-                  contact@tpe-sa.com
+                <a href={`mailto:${contact.emailStandard}`} className="text-slate-950 font-bold hover:text-tpe-magenta block">
+                  {contact.emailStandard}
                 </a>
-                <a href="mailto:tpe.commercial@topnet.tn" className="text-slate-500 hover:text-tpe-magenta block">
-                  tpe.commercial@topnet.tn
+                <a href={`mailto:${contact.emailCommercial}`} className="text-slate-500 hover:text-tpe-magenta block">
+                  {contact.emailCommercial}
                 </a>
               </div>
             </div>
@@ -106,7 +109,7 @@ export const ContactLocation: React.FC<ContactLocationProps> = ({ currentLang, o
                 {t.hoursTitle}
               </span>
               <p className="text-xs font-sans text-slate-600">
-                {t.hoursText}
+                {contact.openingHours[currentLang] || t.hoursText}
               </p>
             </div>
 

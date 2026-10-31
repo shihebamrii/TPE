@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Ship, Plane, Clock, ShieldCheck, ArrowRight, Anchor, Globe, CheckCircle2 } from 'lucide-react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
+import { useSiteData } from '../context/SiteContext';
 import { ScrollReveal } from './common/ScrollReveal';
 
 interface NearshoringMapProps {
@@ -10,10 +11,12 @@ interface NearshoringMapProps {
 
 export const NearshoringMap: React.FC<NearshoringMapProps> = ({ currentLang }) => {
   const t = translations[currentLang].nearshore;
+  const { data } = useSiteData();
   const [selectedRouteIdx, setSelectedRouteIdx] = useState<number>(0);
 
-  const routeDetails = [
+  const routeDetails = data.nearshoringRoutes && data.nearshoringRoutes.length > 0 ? data.nearshoringRoutes : [
     {
+      id: "route-marseille",
       destination: "Marseille / Sud France",
       time: "48 Heures",
       mode: "Ferry Ro-Ro Quotidien",
@@ -23,6 +26,7 @@ export const NearshoringMap: React.FC<NearshoringMapProps> = ({ currentLang }) =
       badge: "LIAISON N°1 FRANCE",
     },
     {
+      id: "route-genes",
       destination: "Gênes / Italie du Nord",
       time: "48 Heures",
       mode: "Liaison Maritime Ro-Ro Directe",
@@ -31,25 +35,9 @@ export const NearshoringMap: React.FC<NearshoringMapProps> = ({ currentLang }) =
       frequency: "5 départs maritimes par semaine",
       badge: "AXE INDUSTRIEL ITALIE",
     },
-    {
-      destination: "Barcelone / Espagne",
-      time: "72 Heures",
-      mode: "Cargo Ligne Régulière",
-      port: "Port de Radès vers Port de Barcelone (Accès Catalogne & Madrid)",
-      customs: "Accord EUR.1 : Zéro droit de douane, transit sécurisé par scellé douanier",
-      frequency: "Liaisons maritimes bi-hebdomadaires",
-      badge: "CORRIDOR IBÉRIQUE",
-    },
-    {
-      destination: "Paris / Milan / Francfort",
-      time: "24 Heures",
-      mode: "Fret Aérien Express Cargo",
-      port: "Aéroport International de Tunis-Carthage vers Roissy-CDG, Malpensa & Francfort",
-      customs: "Dédouanement express sous 4h à l'arrivée en aéroport européen",
-      frequency: "Vols cargo quotidiens multiples",
-      badge: "PROTOTYPES & CAPSULES EXPRESS",
-    },
   ];
+
+  const currentRoute = routeDetails[selectedRouteIdx] || routeDetails[0];
 
   return (
     <section id="nearshore" className="py-24 bg-white border-t border-slate-200">
@@ -133,7 +121,7 @@ export const NearshoringMap: React.FC<NearshoringMapProps> = ({ currentLang }) =
                   HUB LOGISTIQUE SÉLECTIONNÉ
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-sans font-black text-slate-950 uppercase tracking-tight">
-                  {routeDetails[selectedRouteIdx].destination}
+                  {currentRoute.destination}
                 </h3>
               </div>
 
@@ -151,7 +139,7 @@ export const NearshoringMap: React.FC<NearshoringMapProps> = ({ currentLang }) =
                   ITINÉRAIRE & PORTS DE TRANSIT
                 </span>
                 <p className="text-sm font-sans text-slate-800 font-medium">
-                  {routeDetails[selectedRouteIdx].port}
+                  {currentRoute.port}
                 </p>
               </div>
 
@@ -160,7 +148,7 @@ export const NearshoringMap: React.FC<NearshoringMapProps> = ({ currentLang }) =
                   RÉGIME DOUANIER & EXONÉRATION
                 </span>
                 <p className="text-sm font-sans text-slate-800 font-medium">
-                  {routeDetails[selectedRouteIdx].customs}
+                  {currentRoute.customs}
                 </p>
               </div>
 
@@ -169,7 +157,7 @@ export const NearshoringMap: React.FC<NearshoringMapProps> = ({ currentLang }) =
                   FRÉQUENCE DES EXPÉDITIONS
                 </span>
                 <p className="text-sm font-sans text-slate-800 font-medium">
-                  {routeDetails[selectedRouteIdx].frequency}
+                  {currentRoute.frequency}
                 </p>
               </div>
             </div>
@@ -185,7 +173,7 @@ export const NearshoringMap: React.FC<NearshoringMapProps> = ({ currentLang }) =
                   EU
                 </div>
                 <span className="text-xs font-mono font-bold text-slate-700">
-                  Transit Port-à-Port garanti {routeDetails[selectedRouteIdx].time}
+                  Transit Port-à-Port garanti {currentRoute.time}
                 </span>
               </div>
 
@@ -201,16 +189,16 @@ export const NearshoringMap: React.FC<NearshoringMapProps> = ({ currentLang }) =
         {/* The 4 Nearshoring Strategic Advantages (Clean 4-Column Architectural Ledger) */}
         <ScrollReveal animation="fade-up" delay={150}>
           <div className="mt-16 pt-12 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {t.advantages.map((adv, idx) => (
+            {(data.nearshoringAdvantages || t.advantages).map((adv: any, idx) => (
               <div key={idx} className="space-y-2">
                 <span className="text-xs font-mono font-bold text-tpe-magenta block">
                   /{adv.num}
                 </span>
                 <h4 className="font-sans font-black text-lg text-slate-950 uppercase tracking-tight">
-                  {adv.title}
+                  {typeof adv.title === 'string' ? adv.title : (adv.title[currentLang] || adv.title.fr)}
                 </h4>
                 <p className="text-xs sm:text-sm font-sans text-slate-600 leading-relaxed">
-                  {adv.desc}
+                  {typeof adv.desc === 'string' ? adv.desc : (adv.desc[currentLang] || adv.desc.fr)}
                 </p>
               </div>
             ))}

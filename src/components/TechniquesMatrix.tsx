@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
-import { techniquesData } from '../data/techniques';
+import { useSiteData } from '../context/SiteContext';
 import { ScrollReveal } from './common/ScrollReveal';
 
 interface TechniquesMatrixProps {
@@ -48,75 +48,27 @@ interface TechniqueEnriched {
   badge: { en: string; fr: string };
 }
 
-const TECHNIQUES_ENRICHED: TechniqueEnriched[] = [
-  {
-    ...techniquesData[0],
-    shortName: 'Sérigraphie',
-    badgeCapacity: '20 300 pcs / jour',
-    compactVolume: '20 300 /j',
-    machinePhoto: '/assets/showcase/machines/screenprint_roq_oval.jpg',
-    macroPhoto: '/client-assets/photos_1/image00005.jpeg',
-    machineLabel: 'Carrousel Automatique ROQ Ovale',
-    macroLabel: 'Impression Pigmentaire Haute Précision',
-    colorAccent: 'text-tpe-magenta border-tpe-magenta',
-    cmykDot: 'bg-tpe-magenta',
-  },
-  {
-    ...techniquesData[1],
-    shortName: 'Broderie',
-    badgeCapacity: '5 400 pcs / jour',
-    compactVolume: '5 400 /j',
-    machinePhoto: '/assets/showcase/machines/embroidery_tajima_bay.jpg',
-    macroPhoto: '/assets/showcase/products/embroidery_macro_stitch.jpg',
-    machineLabel: 'Parc Brodeuses Japonaises Tajima',
-    macroLabel: 'Point de Chaînette & Relief 3D 4mm',
-    colorAccent: 'text-tpe-cyan border-tpe-cyan',
-    cmykDot: 'bg-tpe-cyan',
-  },
-  {
-    ...techniquesData[2],
-    shortName: 'Étiquetage',
-    badgeCapacity: '132 000 pcs / jour',
-    compactVolume: '132 000 /j',
-    machinePhoto: '/assets/showcase/products/hangtags_table_replay_teddy.jpg',
-    macroPhoto: '/assets/showcase/products/hangtags_tommy_mustang_wood.jpg',
-    machineLabel: 'Atelier Étiquetage & Cavaliers Replay/Teddy',
-    macroLabel: 'Hang Tags Tommy Hilfiger & Mustang Bois',
-    colorAccent: 'text-amber-600 border-amber-500',
-    cmykDot: 'bg-tpe-yellow',
-  },
-  {
-    ...techniquesData[3],
-    shortName: 'Digital & DTF',
-    badgeCapacity: 'Direct Textile',
-    compactVolume: 'Aeon Kyo',
-    machinePhoto: '/assets/showcase/machines/digital_aeon_kyo_pinko.jpg',
-    macroPhoto: '/assets/showcase/machines/digital_aeon_kyo_operator.jpg',
-    machineLabel: 'Aeon Kyo Direct Textile (Pinko)',
-    macroLabel: 'Station Tactile & Étalonnage Opérateur',
-    colorAccent: 'text-tpe-red border-tpe-red',
-    cmykDot: 'bg-tpe-red',
-  },
-  {
-    ...techniquesData[4],
-    shortName: 'Bureau CAO',
-    badgeCapacity: 'Études & UV',
-    compactVolume: 'Pre-Press',
-    machinePhoto: '/assets/showcase/machines/cad_prepress_office.jpg',
-    macroPhoto: '/assets/showcase/machines/laser_cutting_labels.jpg',
-    machineLabel: 'Bureau CAO, Lectra & Piquage',
-    macroLabel: 'Découpe Laser & Insolation UV Toiles',
-    colorAccent: 'text-slate-900 border-slate-900',
-    cmykDot: 'bg-slate-900',
-  },
-];
-
 export const TechniquesMatrix: React.FC<TechniquesMatrixProps> = ({
   currentLang,
   onSelectMacro,
   onSelectRFQTechnique,
 }) => {
   const t = translations[currentLang].techniques;
+  const { data } = useSiteData();
+
+  const TECHNIQUES_ENRICHED: TechniqueEnriched[] = data.techniques.map((tech, idx) => ({
+    ...tech,
+    shortName: tech.shortName || tech.title[currentLang]?.split(' ')[0] || tech.title.fr.split(' ')[0],
+    badgeCapacity: tech.badgeCapacity || tech.specs.capacity,
+    compactVolume: tech.compactVolume || tech.specs.capacity.split(' ')[0],
+    machinePhoto: tech.machinePhoto || tech.image,
+    macroPhoto: tech.macroPhoto || tech.macroImage || tech.image,
+    machineLabel: tech.machineLabel || tech.title[currentLang] || tech.title.fr,
+    macroLabel: tech.macroLabel || 'Macro Texture Haute Définition',
+    colorAccent: tech.colorAccent || (idx % 2 === 0 ? 'text-tpe-magenta border-tpe-magenta' : 'text-tpe-cyan border-tpe-cyan'),
+    cmykDot: tech.cmykDot || (idx % 2 === 0 ? 'bg-tpe-magenta' : 'bg-tpe-cyan'),
+  }));
+
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [viewMode, setViewMode] = useState<'deck' | 'grid'>('deck');
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(true);
@@ -159,7 +111,8 @@ export const TechniquesMatrix: React.FC<TechniquesMatrixProps> = ({
     }));
   };
 
-  const activeTech = TECHNIQUES_ENRICHED[activeIndex];
+  const activeTech = TECHNIQUES_ENRICHED[activeIndex] || TECHNIQUES_ENRICHED[0];
+  if (!activeTech) return null;
   const activeIsMacro = showMacroMap[activeIndex] || false;
   const activePhoto = activeIsMacro ? activeTech.macroPhoto : activeTech.machinePhoto;
   const activeLabel = activeIsMacro ? activeTech.macroLabel : activeTech.machineLabel;

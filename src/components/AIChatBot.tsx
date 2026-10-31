@@ -18,6 +18,7 @@ import {
   Minimize2
 } from 'lucide-react';
 import type { Language } from '../types';
+import { useSiteData } from '../context/SiteContext';
 
 interface AIChatBotProps {
   currentLang: Language;
@@ -37,6 +38,14 @@ interface ChatMessage {
 }
 
 export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) => {
+  const { data } = useSiteData();
+  const chatbotSettings = data.chatbot;
+  const contact = data.contact;
+
+  if (chatbotSettings && !chatbotSettings.isEnabled) {
+    return null;
+  }
+
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -176,11 +185,12 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
         const text = currentLang === 'fr'
           ? "Bonjour TPE Tunisie, je viens d'échanger avec votre concierge IA sur le site et je souhaite parler à un ingénieur."
           : "Hello TPE Tunisia, I just consulted your factory AI on your website and would like to speak with an engineer.";
-        window.open(`https://wa.me/21698761003?text=${encodeURIComponent(text)}`, '_blank');
+        const phone = contact.whatsappNumberOnly || contact.phoneWhatsapp.replace(/[^0-9]/g, '');
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
         break;
       }
       case 'call':
-        window.location.href = 'tel:+21672457143';
+        window.location.href = `tel:${contact.phoneStandard.replace(/\s+/g, '')}`;
         break;
       case 'scroll':
         if (action.target) {
@@ -196,6 +206,25 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
   // Knowledge base intent processor
   const processUserQuery = (query: string): { text: string; actions?: ChatMessage['actions'] } => {
     const q = query.toLowerCase().trim();
+
+    // Check custom knowledge base from admin dashboard first
+    if (chatbotSettings?.knowledgeBase) {
+      for (const item of chatbotSettings.knowledgeBase) {
+        const matchesTag = item.tags?.some((t) => q.includes(t.toLowerCase()));
+        const matchesQFr = item.question?.fr && q.includes(item.question.fr.toLowerCase().trim());
+        const matchesQEn = item.question?.en && q.includes(item.question.en.toLowerCase().trim());
+
+        if (matchesTag || matchesQFr || matchesQEn) {
+          return {
+            text: item.answer[currentLang] || item.answer.fr,
+            actions: [
+              { label: currentLang === 'fr' ? '📋 Configurer mon devis' : '📋 Request a Quote', type: 'rfq' },
+              { label: currentLang === 'fr' ? '📲 WhatsApp Usine' : '📲 WhatsApp Factory', type: 'whatsapp' },
+            ],
+          };
+        }
+      }
+    }
 
     // 1. Capacities / Machines / Volumes / MOQ
     if (q.includes('capacité') || q.includes('cadence') || q.includes('machine') || q.includes('roq') || q.includes('tajima') || q.includes('volume') || q.includes('moq') || q.includes('quantité') || q.includes('capacity')) {

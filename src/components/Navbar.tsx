@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, ArrowUpRight, Phone, MessageSquare } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Phone, MessageSquare, Lock } from 'lucide-react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
+import { useSiteData } from '../context/SiteContext';
 
 interface NavbarProps {
   currentLang: Language;
@@ -10,6 +11,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ currentLang, onLanguageChange, onOpenRFQ }) => {
+  const { isAdminLoggedIn, setViewMode } = useSiteData();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -217,6 +219,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentLang, onLanguageChange, o
                 EN
               </button>
             </div>
+
+            {/* Admin Console Pill if logged in */}
+            {isAdminLoggedIn && (
+              <button
+                onClick={() => setViewMode('admin')}
+                className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-900 hover:bg-tpe-magenta text-white rounded-sm text-xs font-mono font-bold transition-all shadow-xs"
+                title="Tableau de bord administrateur"
+              >
+                <Lock className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Admin</span>
+              </button>
+            )}
 
             {/* High-Visibility Tech-Pack RFQ Button */}
             <button

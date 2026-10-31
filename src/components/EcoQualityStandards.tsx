@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
+import { useSiteData } from '../context/SiteContext';
 import { ScrollReveal } from './common/ScrollReveal';
 
 interface EcoQualityStandardsProps {
@@ -29,9 +30,12 @@ interface StandardPillar {
 
 export const EcoQualityStandards: React.FC<EcoQualityStandardsProps> = ({ currentLang }) => {
   const t = translations[currentLang].standards;
+  const { data } = useSiteData();
   const [selectedPillar, setSelectedPillar] = useState<StandardPillar | null>(null);
 
-  const pillars: StandardPillar[] = [
+  const pillars: StandardPillar[] = (data.standardsPillars && data.standardsPillars.length > 0)
+    ? data.standardsPillars
+    : [
     {
       id: "triple-iso",
       tag: "PILLIER 01 • QUALITÉ & RSE",
@@ -49,55 +53,6 @@ export const EcoQualityStandards: React.FC<EcoQualityStandardsProps> = ({ curren
         "Ateliers climatisés & sécurité de 140+ collaborateurs",
       ],
       auditInfo: "Certifié par organismes accrédités internationaux. Audits annuels.",
-    },
-    {
-      id: "gots-bio",
-      tag: "PILLIER 02 • FILIÈRE BIOLOGIQUE",
-      badge: "COTON GOTS",
-      title: "GOTS (Global Organic)",
-      subtitle: "Coton Biologique Certifié d'Origine",
-      logos: [
-        { src: "/assets/logos/certifications/gots.svg", alt: "GOTS Global Organic Textile Standard", hClass: "h-12 sm:h-14" },
-      ],
-      highlights: [
-        "Homologation ennoblissement sur cotons 100% bio",
-        "Traçabilité sous Transaction Certificate (TC)",
-        "Audit des critères sociaux et environnementaux",
-      ],
-      auditInfo: "Chaîne de contrôle certifiée de la filature à la finition finale.",
-    },
-    {
-      id: "chimie-recyclage",
-      tag: "PILLIER 03 • CHIMIE SÛRE & RECYCLÉ",
-      badge: "SANS PHTALATE",
-      title: "OEKO-TEX® & GRS",
-      subtitle: "Chimie Saine & Fibres Recyclées",
-      logos: [
-        { src: "/assets/logos/certifications/oeko_tex.svg", alt: "OEKO-TEX Standard 100", hClass: "h-11 sm:h-12" },
-        { src: "/assets/logos/certifications/grs.png", alt: "GRS Global Recycled Standard", hClass: "h-9 sm:h-10" },
-      ],
-      highlights: [
-        "Encres à l'eau sans métaux lourds ni phtalates",
-        "Certification contact direct avec la peau Classe I/II",
-        "Global Recycled Standard pour fils polyester/nylon",
-      ],
-      auditInfo: "Conformité stricte aux listes RSL des plus grandes marques européennes.",
-    },
-    {
-      id: "accord-eur1",
-      tag: "PILLIER 04 • DOUANE 0% TAXE",
-      badge: "ACCORD EUR.1",
-      title: "Franchise Douanière UE",
-      subtitle: "Exonération Totale des Droits de Douane",
-      logos: [
-        { src: "/assets/logos/certifications/eu_flag.svg", alt: "Drapeau Union Européenne Accord EUR.1", hClass: "h-8 sm:h-9" },
-      ],
-      highlights: [
-        "0% de droits de douane à l'importation dans l'UE",
-        "Statut Entreprise Totalement Exportatrice (Offshore)",
-        "Transit maritime express 48h (Marseille & Gênes)",
-      ],
-      auditInfo: "Bénéfice immédiat des accords bilatéraux Union Européenne - Tunisie.",
     },
   ];
 

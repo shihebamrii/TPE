@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { ArrowDown, ArrowUpRight, Volume2, VolumeX, Play, Pause } from 'lucide-react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
+import { useSiteData } from '../context/SiteContext';
 
 interface HeroProps {
   currentLang: Language;
@@ -10,6 +11,8 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ }) => {
   const t = translations[currentLang].hero;
+  const { data } = useSiteData();
+  const heroData = data.hero;
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
@@ -32,16 +35,18 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ }) => {
     }
   };
 
-  const marqueeItems = [
-    "SÉRIGRAPHIE HAUTE CADENCE : 20 300 PIÈCES / JOUR",
-    "BRODERIE INDUSTRIELLE MULTI-TÊTES : 5 400 PIÈCES / JOUR",
-    "LEADER DE L'ÉTIQUETAGE & HANG TAGS : 132 000 PIÈCES / JOUR",
-    "TRANSIT MARITIME 48H DIRECT VERS MARSEILLE & GÊNES",
-    "ACCORD DE LIBRE-ÉCHANGE EUR.1 SANS DROITS DE DOUANE",
-    "TRIPLE CERTIFICATION ISO 9001 • ISO 14001 • ISO 45001",
-    "TEXTILE BIO & RECYCLÉ : GOTS • GRS • RCS • OCS",
-    "FONDÉE EN AVRIL 2015 • RAS JEBEL, GOUVERNORAT DE BIZERTE",
-  ];
+  const marqueeItems = heroData.marqueeItems && heroData.marqueeItems.length > 0
+    ? heroData.marqueeItems
+    : [
+        "SÉRIGRAPHIE HAUTE CADENCE : 20 300 PIÈCES / JOUR",
+        "BRODERIE INDUSTRIELLE MULTI-TÊTES : 5 400 PIÈCES / JOUR",
+        "LEADER DE L'ÉTIQUETAGE & HANG TAGS : 132 000 PIÈCES / JOUR",
+        "TRANSIT MARITIME 48H DIRECT VERS MARSEILLE & GÊNES",
+        "ACCORD DE LIBRE-ÉCHANGE EUR.1 SANS DROITS DE DOUANE",
+        "TRIPLE CERTIFICATION ISO 9001 • ISO 14001 • ISO 45001",
+        "TEXTILE BIO & RECYCLÉ : GOTS • GRS • RCS • OCS",
+        "FONDÉE EN AVRIL 2015 • RAS JEBEL, GOUVERNORAT DE BIZERTE",
+      ];
 
   return (
     <section className="relative min-h-[96vh] flex flex-col justify-between pt-24 pb-0 overflow-hidden bg-black text-white">
@@ -54,9 +59,10 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ }) => {
           loop
           muted
           playsInline
+          key={heroData.videoUrl}
           className="w-full h-full object-cover object-center scale-[1.03] opacity-80"
         >
-          <source src="/hero-video.mp4" type="video/mp4" />
+          <source src={heroData.videoUrl || "/hero-video.mp4"} type="video/mp4" />
         </video>
 
         {/* High-Contrast Luxury Cinematic Scrim */}
@@ -82,10 +88,12 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ }) => {
         >
           {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
         </button>
-        <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs font-mono font-bold text-white">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>USINE EN PRODUCTION</span>
-        </div>
+        {heroData.isLiveStatusActive && (
+          <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs font-mono font-bold text-white">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>{heroData.liveStatusText || "USINE EN PRODUCTION"}</span>
+          </div>
+        )}
       </div>
 
       {/* Hero Editorial Content */}
@@ -101,7 +109,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ }) => {
           </div>
 
           <span className="text-xs uppercase tracking-widest font-mono font-bold text-white/90">
-            TEXTILE PRINT & EMBROIDER • RAS JEBEL, TUNISIE
+            {heroData.badge[currentLang] || "TEXTILE PRINT & EMBROIDER • RAS JEBEL, TUNISIE"}
           </span>
           <span className="text-white/40 hidden sm:inline">•</span>
           <span className="text-xs uppercase tracking-widest font-mono text-emerald-400 font-bold hidden sm:inline">
@@ -112,20 +120,31 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ }) => {
         {/* Monumental Headline */}
         <div className="max-w-4xl space-y-4">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-serif text-white leading-[1.06] tracking-tight">
-            L'excellence du façonnage <br />
-            <span className="italic font-normal text-slate-200">textile méditerranéen.</span>
+            {heroData.titleMain?.[currentLang] && heroData.titleMain[currentLang] !== 'FAÇONNAGE & ENNOBLISSEMENT TEXTILE DE PRESTIGE'
+              ? heroData.titleMain[currentLang]
+              : currentLang === 'en'
+              ? 'The pinnacle of Mediterranean'
+              : "L'excellence du façonnage"}{' '}
+            <br />
+            <span className="italic font-normal text-slate-200">
+              {heroData.titleSub?.[currentLang] && !heroData.titleSub[currentLang].startsWith('Partenaire de référence')
+                ? heroData.titleSub[currentLang]
+                : currentLang === 'en'
+                ? 'textile craftsmanship.'
+                : 'textile méditerranéen.'}
+            </span>
           </h1>
 
           {/* Official Handwritten Red Slogan */}
           <div className="pt-2">
             <span className="font-script text-2xl sm:text-3xl lg:text-4xl text-[#FF4D4D] font-bold drop-shadow-md">
-              {t.motto}
+              {heroData.motto[currentLang] || t.motto}
             </span>
           </div>
 
           {/* Descriptive Body */}
           <p className="text-base sm:text-lg lg:text-xl text-slate-200 max-w-2xl leading-relaxed font-sans pt-2 font-normal">
-            {t.description}
+            {heroData.description[currentLang] || t.description}
           </p>
         </div>
 
@@ -147,21 +166,33 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ }) => {
             <ArrowDown className="w-3.5 h-3.5" />
           </a>
 
-          {/* 3 Real Production Capacities Ticker (From TPE Presentation) */}
+          {/* 3 Real Production Capacities Ticker */}
           <div className="hidden lg:flex items-center gap-6 pl-8 border-l border-white/20 text-xs font-mono">
             <div>
-              <span className="block font-black text-white text-base">20 300</span>
-              <span className="text-[11px] text-slate-300 uppercase">Sérigraphie / jour</span>
+              <span className="block font-black text-white text-base">
+                {heroData.stats.screenprint.split(' ')[0]}
+              </span>
+              <span className="text-[11px] text-slate-300 uppercase">
+                {heroData.stats.screenprintLabel[currentLang] || "Sérigraphie / jour"}
+              </span>
             </div>
             <div className="w-px h-8 bg-white/20"></div>
             <div>
-              <span className="block font-black text-white text-base">5 400</span>
-              <span className="text-[11px] text-slate-300 uppercase">Broderie / jour</span>
+              <span className="block font-black text-white text-base">
+                {heroData.stats.embroidery.split(' ')[0]}
+              </span>
+              <span className="text-[11px] text-slate-300 uppercase">
+                {heroData.stats.embroideryLabel[currentLang] || "Broderie / jour"}
+              </span>
             </div>
             <div className="w-px h-8 bg-white/20"></div>
             <div>
-              <span className="block font-black text-tpe-yellow text-base">132 000</span>
-              <span className="text-[11px] text-slate-300 uppercase">Hang Tags / jour</span>
+              <span className="block font-black text-tpe-yellow text-base">
+                {heroData.stats.labels.split(' ')[0]}
+              </span>
+              <span className="text-[11px] text-slate-300 uppercase">
+                {heroData.stats.labelsLabel[currentLang] || "Hang Tags / jour"}
+              </span>
             </div>
           </div>
         </div>

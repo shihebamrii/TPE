@@ -8,10 +8,12 @@ import {
   ShieldCheck, 
   MessageSquare,
   Clock,
-  Sparkles
+  Sparkles,
+  Lock
 } from 'lucide-react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
+import { useSiteData } from '../context/SiteContext';
 
 interface FooterProps {
   currentLang: Language;
@@ -21,6 +23,8 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenRFQ }) => {
   const t = translations[currentLang].footer;
   const nav = translations[currentLang].nav;
+  const { data, setViewMode } = useSiteData();
+  const contact = data.contact;
 
   // Real-time Factory Clock in Ras Jebel (UTC+1)
   const [factoryTime, setFactoryTime] = useState<string>('');
@@ -194,33 +198,33 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenRFQ }) => {
 
             <div className="space-y-2 text-xs font-mono text-slate-300">
               <a
-                href="tel:+21672457143"
+                href={`tel:${contact.phoneStandard.replace(/\s+/g, '')}`}
                 className="flex items-center gap-2 hover:text-white transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-tpe-cyan shrink-0" />
-                <span className="font-bold">+216 72 457 143</span>
+                <span className="font-bold">{contact.phoneStandard}</span>
                 <span className="text-[10px] text-slate-500">(Standard)</span>
               </a>
 
               <a
-                href="https://wa.me/21698761003"
+                href={`https://wa.me/${contact.whatsappNumberOnly || contact.phoneWhatsapp.replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors font-bold"
               >
                 <MessageSquare className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>+216 98 761 003</span>
+                <span>{contact.phoneWhatsapp}</span>
                 <span className="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded-xs">
                   WhatsApp Usine
                 </span>
               </a>
 
               <a
-                href="mailto:contact@tpe-sa.com"
+                href={`mailto:${contact.emailStandard}`}
                 className="flex items-center gap-2 text-slate-300 hover:text-tpe-magenta transition-colors"
               >
                 <Mail className="w-3.5 h-3.5 text-tpe-yellow shrink-0" />
-                <span>contact@tpe-sa.com</span>
+                <span>{contact.emailStandard}</span>
               </a>
             </div>
 
@@ -319,9 +323,18 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenRFQ }) => {
             </span>
           </div>
 
-          {/* Right: Legal Links & Back to Top */}
+          {/* Right: Legal Links, Admin Access & Back to Top */}
           <div className="flex items-center gap-4">
             <span className="hover:text-slate-300 transition-colors cursor-pointer">{t.confidentiality}</span>
+            <span>•</span>
+            <button
+              onClick={() => setViewMode('admin')}
+              className="inline-flex items-center gap-1.5 text-slate-400 hover:text-tpe-magenta transition-colors"
+              title="Console d'Administration TPE"
+            >
+              <Lock className="w-3.5 h-3.5" />
+              <span>Administration</span>
+            </button>
             <span>•</span>
             <button
               onClick={scrollToTop}

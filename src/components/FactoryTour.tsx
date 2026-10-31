@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
-import { factoryMachines } from '../data/factory';
+import { useSiteData } from '../context/SiteContext';
 import { ScrollReveal } from './common/ScrollReveal';
 
 interface FactoryTourProps {
@@ -142,19 +142,31 @@ const MACHINES_EXTENDED: Record<string, MachineExtended> = {
 
 export const FactoryTour: React.FC<FactoryTourProps> = ({ currentLang, onSelectPhoto }) => {
   const t = translations[currentLang].plant;
+  const { data } = useSiteData();
+  const machines = data.machines;
   const [activeMachineIndex, setActiveMachineIndex] = useState<number>(0);
   const [activeHotspotIndex, setActiveHotspotIndex] = useState<number | null>(null);
 
-  const currentMachine = factoryMachines[activeMachineIndex] || factoryMachines[0];
-  const currentMeta = MACHINES_EXTENDED[currentMachine.id] || MACHINES_EXTENDED['carrousel-serigraphie-roq'];
+  const currentMachine = machines[activeMachineIndex] || machines[0];
+  const currentMeta = currentMachine ? {
+    id: currentMachine.id,
+    brandBadge: currentMachine.brandBadge || `${currentMachine.brand} • POSTE INDUSTRIEL`,
+    stationNum: currentMachine.stationNum || `0${activeMachineIndex + 1}`,
+    zone: currentMachine.zone || 'ATELIER TEXTILE RAS JEBEL',
+    capacityMetric: currentMachine.capacityMetric || currentMachine.count,
+    speedMetric: currentMachine.speedMetric || 'Cadence industrielle continue',
+    precisionMetric: currentMachine.precisionMetric || 'Calibrage haute précision',
+    regulationMetric: currentMachine.regulationMetric || 'Normes de conformité CE & ISO',
+    hotspots: currentMachine.hotspots || [],
+  } : MACHINES_EXTENDED['carrousel-serigraphie-roq'];
 
   const handlePrev = () => {
-    setActiveMachineIndex((prev) => (prev > 0 ? prev - 1 : factoryMachines.length - 1));
+    setActiveMachineIndex((prev) => (prev > 0 ? prev - 1 : machines.length - 1));
     setActiveHotspotIndex(null);
   };
 
   const handleNext = () => {
-    setActiveMachineIndex((prev) => (prev < factoryMachines.length - 1 ? prev + 1 : 0));
+    setActiveMachineIndex((prev) => (prev < machines.length - 1 ? prev + 1 : 0));
     setActiveHotspotIndex(null);
   };
 
@@ -206,7 +218,7 @@ export const FactoryTour: React.FC<FactoryTourProps> = ({ currentLang, onSelectP
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <span className="px-2.5 text-xs font-mono font-bold text-slate-900">
-                  0{activeMachineIndex + 1} / 0{factoryMachines.length}
+                  0{activeMachineIndex + 1} / 0{machines.length}
                 </span>
                 <button
                   onClick={handleNext}
@@ -546,9 +558,13 @@ export const FactoryTour: React.FC<FactoryTourProps> = ({ currentLang, onSelectP
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {factoryMachines.map((m, idx) => {
+            {machines.map((m, idx) => {
               const isSelected = activeMachineIndex === idx;
-              const meta = MACHINES_EXTENDED[m.id];
+              const meta = {
+                stationNum: m.stationNum || `0${idx + 1}`,
+                brandBadge: m.brandBadge || `${m.brand}`,
+                capacityMetric: m.capacityMetric || m.count,
+              };
 
               return (
                 <div

@@ -3,6 +3,7 @@ import { X, Sparkles, Upload, CheckCircle2, ArrowRight, ArrowLeft, MessageSquare
 import confetti from 'canvas-confetti';
 import type { Language, RFQFormData } from '../types';
 import { translations } from '../data/translations';
+import { useSiteData } from '../context/SiteContext';
 
 interface TechPackRFQModalProps {
   isOpen: boolean;
@@ -18,6 +19,8 @@ export const TechPackRFQModal: React.FC<TechPackRFQModalProps> = ({
   initialTechnique = 'Broderie Industrielle Multi-Têtes & Relief 3D',
 }) => {
   const t = translations[currentLang].rfq;
+  const { addRFQLead, data } = useSiteData();
+  const contact = data.contact;
   const [step, setStep] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -76,6 +79,9 @@ export const TechPackRFQModal: React.FC<TechPackRFQModalProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Save lead into central site CRM
+    addRFQLead(formData);
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -90,7 +96,8 @@ export const TechPackRFQModal: React.FC<TechPackRFQModalProps> = ({
 
   const generateWhatsAppLink = () => {
     const text = `Bonjour TPE Tunisie,\nJe vous contacte suite à une demande de devis :\n- Technique : ${formData.technique}\n- Support : ${formData.productType}\n- Quantité : ${formData.quantityRange}\n- Marque/Société : ${formData.companyName} (${formData.contactName})\n- Email : ${formData.email}\n- Détails : ${formData.projectNotes || 'N/A'}`;
-    return `https://wa.me/21698761003?text=${encodeURIComponent(text)}`;
+    const phone = contact.whatsappNumberOnly || contact.phoneWhatsapp.replace(/[^0-9]/g, '');
+    return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Language } from '../types';
 import { translations } from '../data/translations';
+import { useSiteData } from '../context/SiteContext';
 import { ShieldCheck, Award, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { ScrollReveal } from './common/ScrollReveal';
 
@@ -19,170 +20,19 @@ interface BrandItem {
 
 export const ClientReferences: React.FC<ClientReferencesProps> = ({ currentLang }) => {
   const t = translations[currentLang].hero;
+  const { data } = useSiteData();
   const [activeTab, setActiveTab] = useState<'marquee' | 'grid'>('marquee');
 
-  const brands: BrandItem[] = [
-    {
-      id: "lacoste",
-      name: "LACOSTE",
-      logo: "/assets/logos/brands/lacoste.svg",
-      category: "Sportswear & Polos",
-      technique: "Sérigraphie pigmentaire & Écussons",
-      heightClass: "h-7 sm:h-8",
-    },
-    {
-      id: "tommy",
-      name: "TOMMY HILFIGER",
-      logo: "/assets/logos/brands/tommy_hilfiger.svg",
-      category: "Premium Denim & Casual",
-      technique: "Broderie poitrine & Sérigraphie",
-      heightClass: "h-6 sm:h-7",
-    },
-    {
-      id: "calvin-klein",
-      name: "CALVIN KLEIN",
-      logo: "/assets/logos/brands/calvin_klein.svg",
-      category: "Denim & Sous-vêtements",
-      technique: "Impression discharge & Transfert silicone",
-      heightClass: "h-5 sm:h-6",
-    },
-    {
-      id: "emporio-armani",
-      name: "EMPORIO ARMANI",
-      logo: "/assets/logos/brands/emporio_armani.svg",
-      category: "Haute Confection & Mode",
-      technique: "Broderie fine & Griffes tissées",
-      heightClass: "h-6 sm:h-7",
-    },
-    {
-      id: "sandro",
-      name: "SANDRO PARIS",
-      logo: "/assets/logos/brands/sandro.svg",
-      category: "Prêt-à-Porter Contemporain",
-      technique: "Sérigraphie à l'eau & Hang tags",
-      heightClass: "h-5 sm:h-6",
-    },
-    {
-      id: "karl-lagerfeld",
-      name: "KARL LAGERFELD",
-      logo: "/assets/logos/brands/karl_lagerfeld.svg",
-      category: "Design & Maroquinerie",
-      technique: "Broderie haute densité & Ennoblissemnt",
-      heightClass: "h-6 sm:h-7",
-    },
-    {
-      id: "american-vintage",
-      name: "AMERICAN VINTAGE",
-      logo: "/assets/logos/brands/american_vintage.png",
-      category: "Maille & Couleurs Végétales",
-      technique: "Effet délavé vintage & Teinture pièce",
-      heightClass: "h-6 sm:h-7",
-    },
-    {
-      id: "replay",
-      name: "REPLAY JEANS",
-      logo: "/assets/logos/brands/replay.svg",
-      category: "Denim Haute Technologie",
-      technique: "Sérigraphie rongeant & Broderie 3D",
-      heightClass: "h-6 sm:h-7",
-    },
-    {
-      id: "mustang",
-      name: "MUSTANG TRUE DENIM",
-      logo: "/assets/logos/brands/mustang.svg",
-      category: "Heritage Denim",
-      technique: "Étiquettes cuir & Broderie poches",
-      heightClass: "h-6 sm:h-7",
-    },
-    {
-      id: "pepe-jeans",
-      name: "PEPE JEANS LONDON",
-      logo: "/assets/logos/brands/pepe_jeans.svg",
-      category: "Denim & Confection",
-      technique: "Sérigraphie multi-couleurs & Patchs",
-      heightClass: "h-6 sm:h-7",
-    },
-    {
-      id: "pinko",
-      name: "PINKO",
-      logo: "/assets/logos/brands/pinko.svg",
-      category: "Mode Contemporaine Italienne",
-      technique: "Impression numérique Aeon Kyo",
-      heightClass: "h-5 sm:h-6",
-    },
-    {
-      id: "teddy-smith",
-      name: "TEDDY SMITH",
-      logo: "/assets/logos/brands/teddy-smith.svg",
-      category: "Streetwear & Finitions",
-      technique: "Sérigraphie gonflante & Transfert",
-      heightClass: "h-6 sm:h-7",
-    },
-    {
-      id: "benetton",
-      name: "UNITED COLORS OF BENETTON",
-      logo: "/assets/logos/brands/benetton.svg",
-      category: "Maille & Casualwear",
-      technique: "Broderie point de chaînette & Griffes",
-      heightClass: "h-7 sm:h-8",
-    },
-    {
-      id: "lee-cooper",
-      name: "LEE COOPER",
-      logo: "/assets/logos/brands/lee-cooper.svg",
-      category: "Heritage Denim & Workwear",
-      technique: "Broderie heavy stitch & Écussons tissés",
-      heightClass: "h-7 sm:h-8",
-    },
-    {
-      id: "marc-opolo",
-      name: "MARC O'POLO",
-      logo: "/assets/logos/brands/marc_opolo.svg",
-      category: "Premium Casual Nordic",
-      technique: "Sérigraphie éco-responsable GOTS",
-      heightClass: "h-5 sm:h-6",
-    },
-    {
-      id: "north-sails",
-      name: "NORTH SAILS",
-      logo: "/assets/logos/brands/north_sails.svg",
-      category: "Performance & Nautique",
-      technique: "Broderie technique & Badges étanches",
-      heightClass: "h-8 sm:h-9",
-    },
-    {
-      id: "club-med",
-      name: "CLUB MED",
-      logo: "/assets/logos/brands/club_med.svg",
-      category: "Resortwear & Équipement",
-      technique: "Broderie trident & Sérigraphie grand format",
-      heightClass: "h-7 sm:h-8",
-    },
-    {
-      id: "van-laack",
-      name: "VAN LAACK",
-      logo: "/assets/logos/brands/van_laack.svg",
-      category: "Chemiserie de Luxe",
-      technique: "Monogrammes fins & Broderie micro-point",
-      heightClass: "h-7 sm:h-8",
-    },
-    {
-      id: "sansibar",
-      name: "SANSIBAR SYLT",
-      logo: "/assets/logos/brands/sansibar.png",
-      category: "Lifestyle & Maritime",
-      technique: "Broderie sabres croisés & Hang tags",
-      heightClass: "h-8 sm:h-9",
-    },
-    {
-      id: "school-rag",
-      name: "SCHOOL RAG",
-      logo: "/assets/logos/brands/school_rag.png",
-      category: "Denim & Streetwear",
-      technique: "Sérigraphie & Étiquetage export",
-      heightClass: "h-6 sm:h-7",
-    },
-  ];
+  const brands: BrandItem[] = data.brands
+    .filter((b) => b.active)
+    .map((b) => ({
+      id: b.id,
+      name: b.name,
+      logo: b.logo,
+      category: b.category,
+      technique: b.technique,
+      heightClass: b.heightClass || 'h-6 sm:h-7',
+    }));
 
   // Duplicate for seamless infinite marquee loop
   const marqueeList = [...brands, ...brands];

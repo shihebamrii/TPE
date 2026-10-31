@@ -1,0 +1,1313 @@
+{
+  "hero": {
+    "badge": {
+      "en": "INDUSTRIAL TEXTILE FACILITY • RAS JEBEL, TUNISIA • FOUNDED IN 2015",
+      "fr": "ATELIER INDUSTRIEL TEXTILE • RAS JEBEL, TUNISIA • FONDÉE EN 2015"
+    },
+    "motto": {
+      "en": "« Creation and innovation are our true calling... »",
+      "fr": "« Création et innovation sont notre vocation... »"
+    },
+    "titleMain": {
+      "en": "The pinnacle of Mediterranean",
+      "fr": "L'excellence du façonnage"
+    },
+    "titleSub": {
+      "en": "textile craftsmanship.",
+      "fr": "textile méditerranéen."
+    },
+    "description": {
+      "en": "Based in Ras Jebel (Bizerte), TPE is a 100% export-oriented manufacturer delivering a daily capacity of 20,300 pieces in screen printing, 5,400 pieces in multi-head embroidery, and 132,000 brand labels and hang tags. Direct 48-hour marine transit to Marseille and Genoa duty-free under EUR.1 agreements.",
+      "fr": "Implantée à Ras Jebel (Bizerte), TPE est une entreprise totalement exportatrice alliant une capacité quotidienne de 20 300 pièces en sérigraphie, 5 400 pièces en broderie multi-têtes et 132 000 étiquettes et hang tags. Transit maritime direct de 48 heures vers Marseille et Gênes sans droits de douane sous accord EUR.1."
+    },
+    "videoUrl": "/hero-video.mp4",
+    "liveStatusText": "USINE EN PRODUCTION DIRECTE",
+    "isLiveStatusActive": true,
+    "marqueeItems": [
+      "SÉRIGRAPHIE HAUTE CADENCE : 20 300 PIÈCES / JOUR",
+      "BRODERIE INDUSTRIELLE MULTI-TÊTES : 5 400 PIÈCES / JOUR",
+      "LEADER DE L'ÉTIQUETAGE & HANG TAGS : 132 000 PIÈCES / JOUR",
+      "TRANSIT MARITIME 48H DIRECT VERS MARSEILLE & GÊNES",
+      "ACCORD DE LIBRE-ÉCHANGE EUR.1 SANS DROITS DE DOUANE",
+      "TRIPLE CERTIFICATION ISO 9001 • ISO 14001 • ISO 45001",
+      "TEXTILE BIO & RECYCLÉ : GOTS • GRS • RCS • OCS",
+      "FONDÉE EN AVRIL 2015 • RAS JEBEL, GOUVERNORAT DE BIZERTE"
+    ],
+    "stats": {
+      "screenprint": "20 300 pcs / jour",
+      "screenprintLabel": {
+        "en": "Automated ROQ Screen Printing",
+        "fr": "Sérigraphie Automatique ROQ"
+      },
+      "embroidery": "5 400 pcs / jour",
+      "embroideryLabel": {
+        "en": "Tajima Multi-Head Embroidery",
+        "fr": "Broderie Multi-Têtes Tajima"
+      },
+      "labels": "132 000 pcs / jour",
+      "labelsLabel": {
+        "en": "Labeling & Hang Tags",
+        "fr": "Étiquetage & Hang Tags"
+      },
+      "transit": "48 Heures",
+      "transitLabel": {
+        "en": "Direct Marine Transit to Europe",
+        "fr": "Transit Maritime vers l'Europe"
+      }
+    }
+  },
+  "techniques": [
+    {
+      "id": "serigraphie-carrousel",
+      "category": "screenprint",
+      "title": {
+        "en": "High-Volume Rotary Screen Printing (Sublimation, Embossing, Strass)",
+        "fr": "Sérigraphie Haute Cadence (Sublimation, Embossage, Strass & Transfert)"
+      },
+      "subtitle": {
+        "en": "20,300 pieces daily capacity with automated carousels and quartz flash curing",
+        "fr": "Capacité de 20 300 pièces / jour sur carrousels automatiques et séchage flash"
+      },
+      "description": {
+        "en": "Specialized in high-volume contract textile screen printing on cut panels and assembled garments. Complete mastery of water-based eco-inks, discharge (rongeant), high-density embossing, sublimation, strass rhinestones, and high-tenacity thermal transfers.",
+        "fr": "Leader en sérigraphie industrielle sur pièces coupées et confections montées. Maîtrise exhaustive des encres à l'eau écologiques, rongeant, embossage en relief, sublimation textile, pose de strass et transferts thermiques haute ténacité."
+      },
+      "highlights": {
+        "en": [
+          "Capacity of 20,300 pieces per day across automatic carousels",
+          "Specialty finishes: Embossing, Sublimation, Strass rhinestones & Foil",
+          "Certified GOTS & OEKO-TEX compliant water-based formulation",
+          "In-house UV exposure darkroom with precision 120T mesh tensioning"
+        ],
+        "fr": [
+          "Capacité industrielle de 20 300 pièces / jour sur carrousels automatiques ROQ",
+          "Finitions de spécialités : Embossage relief, Sublimation, Strass et Foil",
+          "Encres à l'eau écologiques certifiées GOTS et OEKO-TEX sans phtalates",
+          "Chambre noire d'insolation UV intégrée avec tension pneumatique des toiles"
+        ]
+      },
+      "specs": {
+        "capacity": "20 300 pièces / jour",
+        "maxColorsOrHeads": "Jusqu'à 12 couleurs indexées",
+        "bestFor": {
+          "en": "High-volume apparel collections, streetwear, corporate merchandising",
+          "fr": "Grandes séries prêt-à-porter, streetwear, réassorts rapides Europe"
+        },
+        "leadTimeSample": "48 Heures"
+      },
+      "image": "/assets/showcase/machines/screenprint_roq_oval.jpg",
+      "macroImage": "/assets/showcase/machines/screenprint_roq_oval.jpg",
+      "badge": {
+        "en": "20,300 pcs / day",
+        "fr": "20 300 pcs / jour"
+      },
+      "shortName": "Sérigraphie",
+      "badgeCapacity": "20 300 pcs / jour",
+      "compactVolume": "20 300 /j",
+      "machinePhoto": "/assets/showcase/machines/screenprint_roq_oval.jpg",
+      "macroPhoto": "/client-assets/photos_1/image00005.jpeg",
+      "machineLabel": "Carrousel Automatique ROQ Ovale",
+      "macroLabel": "Impression Pigmentaire Haute Précision",
+      "colorAccent": "text-tpe-magenta border-tpe-magenta",
+      "cmykDot": "bg-tpe-magenta"
+    },
+    {
+      "id": "broderie-industrielle",
+      "category": "embroidery",
+      "title": {
+        "en": "Multi-Head Industrial Embroidery & 3D High Relief",
+        "fr": "Broderie Industrielle Multi-Têtes & Relief 3D"
+      },
+      "subtitle": {
+        "en": "5,400 pieces daily capacity on Japanese multi-head embroidery systems",
+        "fr": "Capacité de 5 400 pièces / jour sur parc de brodeuses japonaises"
+      },
+      "description": {
+        "en": "Our Japanese multi-head embroidery fleet transforms Madeira and Gunold threads with micron precision. High-density 3D EVA foam embroidery, chain stitching, metallic lurex threads, and laser-contoured crests on any garment support.",
+        "fr": "Notre parc de brodeuses industrielles multi-têtes façonne les fils haut de gamme Madeira et Gunold. Réalisation de broderies 3D en relief sur mousse EVA, broderie bouclette, fils métalliques lurex et écussons découpés laser."
+      },
+      "highlights": {
+        "en": [
+          "Production capacity of 5,400 embroidered pieces per day",
+          "3D foam relief up to 4mm with crisp edge retention after wash",
+          "Direct embroidery on heavy fleece, denim, piqué polos, and caps",
+          "Automatic thread trimming and laser optical alignment"
+        ],
+        "fr": [
+          "Capacité de production de 5 400 pièces brodées / jour",
+          "Relief 3D sur mousse technique jusqu'à 4 mm sans affaissement au lavage",
+          "Broderie directe sur molleton lourd, denim, polos piqués et casquettes",
+          "Coupe-fils automatique et repérage optique par pointeur laser"
+        ]
+      },
+      "specs": {
+        "capacity": "5 400 pièces / jour",
+        "maxColorsOrHeads": "Jusqu'à 15 couleurs par tête",
+        "bestFor": {
+          "en": "Hoodies, polo crests, luxury outerwear, tactical badges, caps",
+          "fr": "Sweats molleton, écussons polos, uniformes de travail, casquettes"
+        },
+        "leadTimeSample": "48 Heures"
+      },
+      "image": "/assets/showcase/machines/embroidery_tajima_bay.jpg",
+      "macroImage": "/assets/showcase/products/embroidery_macro_stitch.jpg",
+      "badge": {
+        "en": "5,400 pcs / day",
+        "fr": "5 400 pcs / jour"
+      },
+      "shortName": "Broderie",
+      "badgeCapacity": "5 400 pcs / jour",
+      "compactVolume": "5 400 /j",
+      "machinePhoto": "/assets/showcase/machines/embroidery_tajima_bay.jpg",
+      "macroPhoto": "/assets/showcase/products/embroidery_macro_stitch.jpg",
+      "machineLabel": "Parc Brodeuses Japonaises Tajima",
+      "macroLabel": "Point de Chaînette & Relief 3D 4mm",
+      "colorAccent": "text-tpe-cyan border-tpe-cyan",
+      "cmykDot": "bg-tpe-cyan"
+    },
+    {
+      "id": "etiquettes-vignettes-hangtags",
+      "category": "finishing",
+      "title": {
+        "en": "Garment Labeling, Hang Tags, Metal Rivets & Pocket Cards",
+        "fr": "Étiquettes, Hang Tags, Cavaliers, Rivets & Cartons de Poche"
+      },
+      "subtitle": {
+        "en": "132,000 pieces daily capacity - European fashion labeling market leader",
+        "fr": "Capacité de 132 000 pièces / jour - Leader de l'étiquetage export"
+      },
+      "description": {
+        "en": "Comprehensive labeling division producing luxury hang tags, pocket cards, woven brand vignettes, care labels, and cavaliers. Automated flat die-cutting, 6-head collator with touchscreen interface, and dual industrial punchers for brass and nickel rivets.",
+        "fr": "Division étiquetage intégrée confectionnant hang tags haut de gamme, cartons de poche, étiquettes tissées, vignettes de composition et cavaliers. Découpe automatique à plat, assembleuse 6 têtes tactile et double perforeuses de rivets métalliques."
+      },
+      "highlights": {
+        "en": [
+          "National leader in labeling: 132,000 pieces per day",
+          "Automated flat die-cutter with vacuum feed & precision registration",
+          "6-head collator with straight & criss-cross stacking programs",
+          "Metal rivets, eyelets, wax cords, FSC recycled cardboard stocks"
+        ],
+        "fr": [
+          "Leader national de l'étiquetage textile : 132 000 pièces / jour",
+          "Découpe à plat automatisée avec margeur à têtes d'aspiration",
+          "Assembleuse de papier 6 têtes avec empilage droit et croisé tactile",
+          "Pose de rivets, œillets métalliques, cordons cirés et cartons recyclés FSC"
+        ]
+      },
+      "specs": {
+        "capacity": "132 000 pièces / jour",
+        "maxColorsOrHeads": "Découpe & assemblage 6 têtes",
+        "bestFor": {
+          "en": "Denim jeans pocket flashers, retail hang tags, woven size vignettes",
+          "fr": "Cartons de poche jeans denim, hang tags prêt-à-porter, cavaliers chaussettes"
+        },
+        "leadTimeSample": "24-48 Heures"
+      },
+      "image": "/assets/showcase/products/hangtags_table_replay_teddy.jpg",
+      "macroImage": "/assets/showcase/products/hangtags_tommy_mustang_wood.jpg",
+      "badge": {
+        "en": "132,000 pcs / day",
+        "fr": "132 000 pcs / jour"
+      },
+      "shortName": "Étiquetage",
+      "badgeCapacity": "132 000 pcs / jour",
+      "compactVolume": "132 000 /j",
+      "machinePhoto": "/assets/showcase/products/hangtags_table_replay_teddy.jpg",
+      "macroPhoto": "/assets/showcase/products/hangtags_tommy_mustang_wood.jpg",
+      "machineLabel": "Atelier Étiquetage & Cavaliers Replay/Teddy",
+      "macroLabel": "Hang Tags Tommy Hilfiger & Mustang Bois",
+      "colorAccent": "text-amber-600 border-amber-500",
+      "cmykDot": "bg-tpe-yellow"
+    },
+    {
+      "id": "impression-digitale-dtf",
+      "category": "digital",
+      "title": {
+        "en": "High-Definition Industrial Digital & DTF (Direct Transfer)",
+        "fr": "Impression Numérique Industrielle & DTF Haute Définition"
+      },
+      "subtitle": {
+        "en": "Aeon Kyo Series digital flatbed printers for photo-realistic reproduction",
+        "fr": "Imprimantes industrielles Aeon Kyo Series pour rendus photographiques"
+      },
+      "description": {
+        "en": "Latest generation Aeon Kyo Series digital printers reproducing multi-color photo gradients, micro-line contours, and complex artwork directly onto garment panels. Zero color-limitations with high wash stability.",
+        "fr": "Dernière génération de machines Digital & DTF (Digital Transfert) Aeon Kyo. Reproduction photographique exacte, dégradés complexes, ombrages fins et contours ultra-précis sans aucune limite de couleurs."
+      },
+      "highlights": {
+        "en": [
+          "Ultra-precise digital resolution reproducing photorealistic gradients",
+          "Aeon Kyo industrial platform with wet-on-wet direct printing",
+          "No plate or screen creation needed for express prototyping",
+          "Eco-certified pigment inks with exceptional color vibrancy"
+        ],
+        "fr": [
+          "Résolution photographique ultra-précise avec fidélité absolue des dégradés",
+          "Parc industriel Aeon Kyo direct textile et transfert DTF",
+          "Zéro coût de cliché ou d'écran pour prototypage immédiat",
+          "Encres pigmentaires certifiées OEKO-TEX résistant aux cycles de lavage intensifs"
+        ]
+      },
+      "specs": {
+        "capacity": "Cadence industrielle rapide",
+        "maxColorsOrHeads": "Spectre CMJN + Blanc couvrant",
+        "bestFor": {
+          "en": "Capsule collections, multi-color artistic graphics, express sampling",
+          "fr": "Collections capsules, visuels artistiques complexes, prototypes rapides"
+        },
+        "leadTimeSample": "24 Heures"
+      },
+      "image": "/assets/showcase/machines/digital_aeon_kyo_pinko.jpg",
+      "macroImage": "/assets/showcase/machines/digital_aeon_kyo_operator.jpg",
+      "badge": {
+        "en": "Digital & DTF",
+        "fr": "Digital & DTF"
+      },
+      "shortName": "Digital & DTF",
+      "badgeCapacity": "Direct Textile",
+      "compactVolume": "Aeon Kyo",
+      "machinePhoto": "/assets/showcase/machines/digital_aeon_kyo_pinko.jpg",
+      "macroPhoto": "/assets/showcase/machines/digital_aeon_kyo_operator.jpg",
+      "machineLabel": "Aeon Kyo Direct Textile (Pinko)",
+      "macroLabel": "Station Tactile & Étalonnage Opérateur",
+      "colorAccent": "text-tpe-red border-tpe-red",
+      "cmykDot": "bg-tpe-red"
+    },
+    {
+      "id": "bureau-etudes-prepresse",
+      "category": "cad",
+      "title": {
+        "en": "CAD Design Studio, Grading & UV Pre-Press Darkroom",
+        "fr": "Bureau d'Études CAO, Patronage & Laboratoire Pré-Presse"
+      },
+      "subtitle": {
+        "en": "Computer-aided design, vector placement, and pneumatic frame tensioning",
+        "fr": "Conception assistée par ordinateur, placement millimétré et insolation UV"
+      },
+      "description": {
+        "en": "Dedicated design studio equipped with Lectra, Gerber, and specialized embroidery digitizing suites. Integrated UV vacuum exposure darkroom, pneumatic silk mesh tensioning up to 120T, and laser plotters.",
+        "fr": "Bureau d'études intégré équipé des suites de numérisation de broderie et séparation de couleurs sérigraphie. Laboratoire d'insolation UV sous vide, tables pneumatiques de tension de soie jusqu'à 120 fils/cm et traceurs haute précision."
+      },
+      "highlights": {
+        "en": [
+          "CAD digitizing for Tajima/Barudan multi-head embroidery",
+          "Color separation and film plotting for tight screen registration",
+          "Vacuum UV frame insolation room with tension inspection gauges",
+          "Tech-pack analysis and feasibility validation under 24 hours"
+        ],
+        "fr": [
+          "Numérisation et piquage CAO pour parcs de broderie Tajima/Barudan",
+          "Séparation chromatique et tirage de films pour repérage micrométrique",
+          "Chambre d'insolation UV sous vide avec contrôle pneumatique de tension",
+          "Analyse de tech-packs et études de faisabilité sous 24 heures"
+        ]
+      },
+      "specs": {
+        "capacity": "Études & Prototypage 24/48h",
+        "maxColorsOrHeads": "Systèmes CAO & Traceurs HD",
+        "bestFor": {
+          "en": "Designers, technical apparel managers, production directors",
+          "fr": "Bureaux de style, chefs de produit et directeurs de production"
+        },
+        "leadTimeSample": "24-48 Heures"
+      },
+      "image": "/assets/showcase/machines/cad_prepress_office.jpg",
+      "macroImage": "/assets/showcase/machines/laser_cutting_labels.jpg",
+      "badge": {
+        "en": "Bureau Technique",
+        "fr": "Bureau Technique"
+      },
+      "shortName": "Bureau CAO",
+      "badgeCapacity": "Études & UV",
+      "compactVolume": "Pre-Press",
+      "machinePhoto": "/assets/showcase/machines/cad_prepress_office.jpg",
+      "macroPhoto": "/assets/showcase/machines/laser_cutting_labels.jpg",
+      "machineLabel": "Bureau CAO, Lectra & Piquage",
+      "macroLabel": "Découpe Laser & Insolation UV Toiles",
+      "colorAccent": "text-slate-900 border-slate-900",
+      "cmykDot": "bg-slate-900"
+    }
+  ],
+  "machines": [
+    {
+      "id": "carrousel-serigraphie-roq",
+      "title": {
+        "en": "ROQ Oval Pro Automatic Rotary Screen Printing Carousels",
+        "fr": "Carrousels Automatiques de Sérigraphie ROQ Oval Pro"
+      },
+      "type": {
+        "en": "High-Speed Automated Industrial Carousels",
+        "fr": "Lignes Sérigraphie Haute Cadence & Séchage Flash"
+      },
+      "count": "20 300 pièces / jour",
+      "brand": "ROQ International & Roqdry Eco",
+      "description": {
+        "en": "High-speed automated industrial carousels with pneumatic squeegees, Roqdry Eco quartz flash curing modules, and micro-metric mechanical registration. Handles water-based inks, discharge, puff embossing, strass, and sublimation.",
+        "fr": "Carrousels industriels haute cadence équipés de racles pneumatiques calibrées, sécheurs intermédiaires flash Roqdry Eco et repérage mécanique micrométrique. Prise en charge des encres à l'eau, rongeant, embossage relief, strass et sublimation."
+      },
+      "specs": {
+        "en": [
+          "Massive daily capacity: 20,300 pieces per day",
+          "Up to 12 spot color stations with micro-alignment",
+          "Continuous hot-air and infrared temperature-controlled tunnels",
+          "Special finishes: Embossing, Sublimation, Strass, and Heat Transfer"
+        ],
+        "fr": [
+          "Capacité de production : 20 300 pièces / jour",
+          "Jusqu'à 12 couleurs indexées avec calage micrométrique",
+          "Tunnels de séchage continu infrarouge et air chaud régulé",
+          "Finitions : Embossage relief, Sublimation, Strass et Transfert thermique"
+        ]
+      },
+      "image": "/assets/showcase/machines/screenprint_roq_oval.jpg",
+      "stationNum": "01",
+      "zone": "PÔLE SÉRIGRAPHIE ROTATIVE",
+      "brandBadge": "ROQ INTERNATIONAL • PORTUGAL",
+      "capacityMetric": "20 300 pcs / jour",
+      "speedMetric": "Cadence automatique 900 pcs/h",
+      "precisionMetric": "Indexation ±0.02 mm (12 stations)",
+      "regulationMetric": "Séchage quartz flash Roqdry Eco",
+      "hotspots": [
+        {
+          "x": 32,
+          "y": 42,
+          "label": "Racles Pneumatiques",
+          "desc": "Pression calibrée et angle constant pour dépôt uniforme des encres à l'eau"
+        },
+        {
+          "x": 68,
+          "y": 36,
+          "label": "Flash Roqdry Eco Quartz",
+          "desc": "Gélification ultra-rapide basse consommation entre chaque passe couleur"
+        },
+        {
+          "x": 48,
+          "y": 78,
+          "label": "Table Indexée 12 Postes",
+          "desc": "Repérage micrométrique continu pour superpositions complexes"
+        }
+      ]
+    },
+    {
+      "id": "parc-broderie-tajima",
+      "title": {
+        "en": "Tajima & Barudan Japanese Multi-Head Industrial Embroidery Bays",
+        "fr": "Bateaux de Broderie Industrielle Multi-Têtes Tajima & Barudan"
+      },
+      "type": {
+        "en": "Precision Japanese Multi-Head Embroidery Units",
+        "fr": "Parc Haute Cadence Broderie Industrielle"
+      },
+      "count": "5 400 pièces / jour",
+      "brand": "Tajima & Barudan Japan",
+      "description": {
+        "en": "High-precision Japanese multi-head bays operating up to 1,000 stitches per minute. Equipped with automated thread trimmers, reinforced needle bars for 3D puff foam, and optical laser crosshair positioning.",
+        "fr": "Bateaux de broderie japonaise Tajima tournant jusqu'à 1 000 points/min. Équipés de coupe-fils automatique, barres d'aiguilles renforcées pour relief 3D sur mousse EVA et pointeurs optiques laser de centrage."
+      },
+      "specs": {
+        "en": [
+          "Daily embroidery volume: 5,400 pieces per day",
+          "High-speed operation up to 1,000 stitches / minute per head",
+          "Direct embroidery on cut panels, finished hoodies, caps & denim",
+          "Premium high-tensile Madeira and Gunold embroidery threads"
+        ],
+        "fr": [
+          "Capacité de production : 5 400 pièces brodées / jour",
+          "Vitesse d'exécution jusqu'à 1 000 points / minute par tête",
+          "Broderie directe sur panneaux coupés, sweats montés, casquettes et denim",
+          "Fils techniques haute résistance Madeira et Gunold"
+        ]
+      },
+      "image": "/assets/showcase/machines/embroidery_tajima_bay.jpg",
+      "stationNum": "02",
+      "zone": "BATEAUX BRODERIE MULTI-TÊTES",
+      "brandBadge": "TAJIMA & BARUDAN • JAPON",
+      "capacityMetric": "5 400 pcs / jour",
+      "speedMetric": "Jusqu'à 1 000 points / min / tête",
+      "precisionMetric": "Aiguilles haute résistance titane",
+      "regulationMetric": "Fils techniques Madeira & Gunold",
+      "hotspots": [
+        {
+          "x": 42,
+          "y": 35,
+          "label": "Têtes Japonaises Tajima",
+          "desc": "Vitesse de pointe 1 000 pts/min avec coupe-fils automatique rasant"
+        },
+        {
+          "x": 62,
+          "y": 55,
+          "label": "Barres Spéciales Relief 3D",
+          "desc": "Maintien rigide pour piquage sur mousse EVA 4mm sans écrasement"
+        },
+        {
+          "x": 28,
+          "y": 68,
+          "label": "Pointeur Optique Laser",
+          "desc": "Centrage et alignement micrométrique sur panneaux coupés et pièces montées"
+        }
+      ]
+    },
+    {
+      "id": "imprimante-aeon-kyo-digital",
+      "title": {
+        "en": "Aeon Kyo Series Industrial Digital Direct-to-Garment Printer",
+        "fr": "Imprimante Numérique Industrielle Aeon Kyo Series"
+      },
+      "type": {
+        "en": "High-Definition Industrial Textile Digital Flatbed",
+        "fr": "Direct Textile Haute Définition & DTF"
+      },
+      "count": "Production Continue HD",
+      "brand": "Aeon Kyo Series Technology",
+      "description": {
+        "en": "State-of-the-art flatbed digital printer producing multi-color photorealistic graphics on garment pieces with zero screen setup costs. Used for luxury brand contracts including Pinko.",
+        "fr": "Plateforme numérique industrielle dernière génération pour reproduction photographique directe sur pièces textiles. Zéro coût de cliché ou d'écran, utilisée notamment pour les collections de la marque italienne Pinko."
+      },
+      "specs": {
+        "en": [
+          "True continuous-tone photographic color gradient resolution",
+          "Industrial printheads with wet-on-wet direct fabric injection",
+          "Certified eco-friendly water-based pigment inks",
+          "Zero setup cost for express capsule runs and sampling"
+        ],
+        "fr": [
+          "Résolution photographique continue pour dégradés subtils et ombrages",
+          "Têtes piézoélectriques industrielles haute cadence",
+          "Encres pigmentaires certifiées OEKO-TEX sans solvants toxiques",
+          "Idéal pour collections capsules et prototypage immédiat 24h"
+        ]
+      },
+      "image": "/assets/showcase/machines/digital_aeon_kyo_pinko.jpg",
+      "stationNum": "03",
+      "zone": "IMPRESSION DIRECTE TEXTILE & DTF",
+      "brandBadge": "AEON KYO SERIES • TECHNOLOGIE",
+      "capacityMetric": "Direct Textile HD",
+      "speedMetric": "Injection piézoélectrique continue",
+      "precisionMetric": "Résolution photographique 1200 dpi",
+      "regulationMetric": "Encres pigmentaires certifiées OEKO-TEX",
+      "hotspots": [
+        {
+          "x": 48,
+          "y": 38,
+          "label": "Têtes Piézoélectriques Industrielles",
+          "desc": "Gouttelettes microscopiques pour dégradés photographiques continus"
+        },
+        {
+          "x": 28,
+          "y": 52,
+          "label": "Encres Pigmentaires Écologiques",
+          "desc": "Formulation sans solvants résistant aux cycles de lavage intensifs"
+        },
+        {
+          "x": 72,
+          "y": 62,
+          "label": "Plateau d'Impression Numérique",
+          "desc": "Production en cours pour les collections de la marque Pinko"
+        }
+      ]
+    },
+    {
+      "id": "ligne-etiquettes-faconnage",
+      "title": {
+        "en": "Automated Flat Die-Cutter, 6-Head Label Collator & Rivet Punchers",
+        "fr": "Découpe Automatique à Plat, Assembleuse 6 Têtes & Perforeuses"
+      },
+      "type": {
+        "en": "Integrated Labeling, Hang Tags & Packaging Production",
+        "fr": "Ligne d'Étiquetage, Hang Tags, Cavaliers & Packaging"
+      },
+      "count": "132 000 pièces / jour",
+      "brand": "Atelier Façonnage & Finition TPE",
+      "description": {
+        "en": "Heavy-duty automatic flat die-cutting machine with suction feeder heads, combined with a 6-head collator with touchscreen control (straight and criss-cross stacking), and dual industrial punchers for metal eyelets and rivets.",
+        "fr": "Machine entièrement automatique de découpe à plat avec margeur à têtes d'aspiration, assembleuse de papier 6 têtes tactile avec empilage droit et croisé, et 2 perforeuses industrielles pour rivets et œillets métalliques."
+      },
+      "specs": {
+        "en": [
+          "Massive labeling capacity: 132,000 pieces per day",
+          "6-head collating station with straight & criss-cross stacking",
+          "Two heavy-duty industrial punchers for brass and nickel rivets",
+          "Pocket cards, cavaliers, care labels, and luxury hang tags"
+        ],
+        "fr": [
+          "Capacité record de 132 000 étiquettes et hang tags / jour",
+          "Assembleuse 6 têtes d'assemblage avec écran tactile",
+          "Deux perforeuses pour pose de rivets et œillets métalliques",
+          "Cartons de poche, cavaliers, étiquettes tissées et hang tags"
+        ]
+      },
+      "image": "/assets/showcase/products/hangtags_table_replay_teddy.jpg",
+      "stationNum": "04",
+      "zone": "ÉTIQUETAGE, HANG TAGS & RIVETS",
+      "brandBadge": "DIVISION FAÇONNAGE TPE",
+      "capacityMetric": "132 000 pcs / jour",
+      "speedMetric": "Découpe automatique par aspiration",
+      "precisionMetric": "Assembleuse 6 têtes tactile",
+      "regulationMetric": "Double perforeuses rivets laiton/nickel",
+      "hotspots": [
+        {
+          "x": 38,
+          "y": 44,
+          "label": "Assembleuse 6 Têtes Tactile",
+          "desc": "Empilage droit et croisé programmé pour liasses de cavaliers et hang tags"
+        },
+        {
+          "x": 72,
+          "y": 36,
+          "label": "Perforeuses Industrielles",
+          "desc": "Sertissage de rivets métalliques et œillets laiton pour denim et jeans"
+        },
+        {
+          "x": 52,
+          "y": 72,
+          "label": "Contrôle Qualité Export",
+          "desc": "Conditionnement sous scellé pour Replay, Teddy Smith et Tommy Hilfiger"
+        }
+      ]
+    },
+    {
+      "id": "laser-decoupe-etiquettes",
+      "title": {
+        "en": "High-Precision Automated CNC Laser Cutting Station",
+        "fr": "Station de Découpe Laser Industrielle CNC pour Vignettes"
+      },
+      "type": {
+        "en": "Thermal Edge-Sealing Laser Equipment",
+        "fr": "Découpe Laser & Soudure Thermique Anti-Effilochage"
+      },
+      "count": "Cadence Haute Vitesse",
+      "brand": "Système Laser Optique Intégré",
+      "description": {
+        "en": "Automated laser cutting unit delivering micron precision contours for woven labels, patches, and badges. Automatically heat-seals fabric edges during cutting to prevent any fraying during garment assembly.",
+        "fr": "Système de découpe laser automatisé garantissant des contours parfaits pour étiquettes tissées, écussons et badges. Soudure thermique instantanée des bords empêchant tout effilochage lors du piquage."
+      },
+      "specs": {
+        "en": [
+          "Optical camera vision system for contour tracking",
+          "Simultaneous thermal edge sealing eliminates frayed threads",
+          "Handles micro-patches, collar labels, and complex silhouettes",
+          "Extreme repeatability with zero blade wear"
+        ],
+        "fr": [
+          "Système optique de repérage automatique par caméra",
+          "Soudure thermique simultanée des arêtes sans effilochage",
+          "Prise en charge des micro-vignettes, cols et écussons complexes",
+          "Répétabilité absolue sans usure mécanique de lame"
+        ]
+      },
+      "image": "/assets/showcase/machines/laser_cutting_labels.jpg",
+      "stationNum": "05",
+      "zone": "DÉCOUPE LASER & SOUDURE THERMIQUE",
+      "brandBadge": "SYSTÈME LASER CNC OPTIQUE",
+      "capacityMetric": "Cadence Haute Vitesse",
+      "speedMetric": "Faisceau laser CO2 haute précision",
+      "precisionMetric": "Guidage optique par caméra CCD",
+      "regulationMetric": "Soudure simultanée anti-effilochage",
+      "hotspots": [
+        {
+          "x": 46,
+          "y": 40,
+          "label": "Faisceau Laser Micro-Focalisé",
+          "desc": "Découpe nette au micron des étiquettes tissées, écussons et badges"
+        },
+        {
+          "x": 66,
+          "y": 56,
+          "label": "Soudure Thermique Instantanée",
+          "desc": "Fusion thermique des lisières empêchant tout effilochage lors du piquage"
+        },
+        {
+          "x": 26,
+          "y": 66,
+          "label": "Système Caméra Optique",
+          "desc": "Reconnaissance automatique des repères et correction géométrique"
+        }
+      ]
+    },
+    {
+      "id": "laboratoire-prepresse-cao",
+      "title": {
+        "en": "Pre-Press CAD Studio, Lectra Plotters & UV Exposure Room",
+        "fr": "Bureau d'Études CAO, Lectra & Chambre d'Insolation UV"
+      },
+      "type": {
+        "en": "CAD Patterning, Separation & Screen Exposure",
+        "fr": "Conception Vectorielle & Sérigraphie Pré-Presse"
+      },
+      "count": "Flux Continu",
+      "brand": "Lectra • Gerber • Tunnels UV",
+      "description": {
+        "en": "Dedicated CAD engineering studio for embroidery stitch programming and high-density film separations.",
+        "fr": "Bureau d'études équipé du système de CAO Lectra pour le patronage, le piquage de broderie et la séparation des couleurs sérigraphiques."
+      },
+      "specs": {
+        "en": [
+          "Vector CAD and embroidery punch-software stations",
+          "High-density digital film plotters for micro-halftones",
+          "Pneumatic 120T mesh tensioning tables with Newton gauges",
+          "Computerized UV vacuum exposure unit for crisp screen stencils"
+        ],
+        "fr": [
+          "Postes de CAO Lectra pour patronage et piquage numérique",
+          "Traceurs typons numériques haute densité pour trames fines",
+          "Table de tension pneumatique des toiles 120T avec tensiomètre",
+          "Chambre d'insolation UV sous vide pour pochoirs ultra-nets"
+        ]
+      },
+      "image": "/assets/showcase/machines/cad_prepress_office.jpg",
+      "stationNum": "06",
+      "zone": "BUREAU D'ÉTUDES & PRÉ-PRESSE",
+      "brandBadge": "LECTRA • GERBER • CHAMBRE UV",
+      "capacityMetric": "Calibrage Millimétré",
+      "speedMetric": "Traceurs films haute densité Dmax",
+      "precisionMetric": "Tension pneumatique toiles 120T",
+      "regulationMetric": "Chambre d'insolation UV sous vide",
+      "hotspots": [
+        {
+          "x": 42,
+          "y": 38,
+          "label": "Postes CAO Lectra & Piquage",
+          "desc": "Numérisation vectorielle et programmation des points pour Tajima/Barudan"
+        },
+        {
+          "x": 76,
+          "y": 44,
+          "label": "Traceurs Numériques HD",
+          "desc": "Tirage de films typons à opacité maximale pour séparation couleur"
+        },
+        {
+          "x": 26,
+          "y": 72,
+          "label": "Table de Tension Pneumatique",
+          "desc": "Contrôle digital en Newtons pour stabilité dimensionnelle des soies"
+        }
+      ]
+    }
+  ],
+  "portfolio": [
+    {
+      "id": "portfolio-replay-tags",
+      "title": {
+        "en": "Replay Hyperflex Eco Plus Luxury Hang Tags & Pantone Swatches",
+        "fr": "Hang Tags Replay Hyperflex Eco Plus & Échantillonnage Pantone"
+      },
+      "category": "badges",
+      "technique": {
+        "en": "Embossed Spot UV & Offset Print on Heavy Artboard",
+        "fr": "Vernis Sélectif Relief, Gaufrage & Impression Offset"
+      },
+      "garment": {
+        "en": "Denim Collection Trims • Replay Jeans",
+        "fr": "Accessoires Denim • Replay Jeans Europe"
+      },
+      "year": "Production TPE",
+      "image": "/assets/showcase/products/hangtags_replay_pantone.jpg",
+      "macroImage": "/assets/showcase/products/hangtags_table_replay_teddy.jpg",
+      "tags": [
+        "Replay Jeans",
+        "Vernis UV",
+        "Pantone Matching",
+        "Éco-Responsable"
+      ],
+      "description": {
+        "en": "Complete series of luxury hang tags, pocket cards, and cavaliers produced for Replay Hyperflex Eco Plus. Calibrated with exact Pantone books and premium finishing.",
+        "fr": "Série complète d'étiquettes de marque, cavaliers et cartes de poche pour Replay Hyperflex Eco Plus. Étalonnage rigoureux aux nuanciers Pantone et finitions luxe."
+      }
+    },
+    {
+      "id": "portfolio-tommy-mustang",
+      "title": {
+        "en": "Tommy Jeans & Mustang True Denim Official Hang Tags",
+        "fr": "Hang Tags Officiels Tommy Jeans & Mustang True Denim"
+      },
+      "category": "fashion",
+      "technique": {
+        "en": "Flat Die-Cut & Metallic Rivet Insertion (132,000 pcs/day)",
+        "fr": "Découpe Automatique à Plat & Pose de Rivets Métalliques"
+      },
+      "garment": {
+        "en": "Mom Jeans & Denim Range • Tommy Jeans & Mustang",
+        "fr": "Gammes Denim & Mom Jeans • Tommy Jeans & Mustang"
+      },
+      "year": "Production TPE",
+      "image": "/assets/showcase/products/hangtags_tommy_mustang_wood.jpg",
+      "macroImage": "/assets/showcase/products/hangtags_table_replay_teddy.jpg",
+      "tags": [
+        "Tommy Jeans",
+        "Mustang",
+        "Teddy Smith",
+        "Rivets Laiton"
+      ],
+      "description": {
+        "en": "Industrial packaging and hang tags produced on TPE flat die-cutting machines with automated vacuum feed, 6-head collation, and metallic eyelets.",
+        "fr": "Hang tags et cartons de poche confectionnés sur nos lignes de découpe automatique à plat, assemblés sur notre unité 6 têtes avec pose d'œillets et rivets en laiton."
+      }
+    },
+    {
+      "id": "portfolio-pinko-digital",
+      "title": {
+        "en": "Pinko Luxury Garment Panels on Aeon Kyo Digital Printer",
+        "fr": "Impression Direct Textile Panneaux Pinko sur Aeon Kyo"
+      },
+      "category": "fashion",
+      "technique": {
+        "en": "High-Definition Industrial Direct-to-Garment Digital Print",
+        "fr": "Impression Numérique Industrielle Haute Définition"
+      },
+      "garment": {
+        "en": "Engineered Fashion Panels • Pinko Italy",
+        "fr": "Panneaux Façonnés • Pinko Italie"
+      },
+      "year": "Production TPE",
+      "image": "/assets/showcase/machines/digital_aeon_kyo_pinko.jpg",
+      "macroImage": "/assets/showcase/machines/digital_aeon_kyo_operator.jpg",
+      "tags": [
+        "Pinko",
+        "Aeon Kyo",
+        "Dégradé Subtil",
+        "Zéro Limite Couleur"
+      ],
+      "description": {
+        "en": "Engineered high-definition gradient panels printed on our Aeon Kyo industrial flatbed printer for Italian luxury label Pinko. Seamless tonal transitions.",
+        "fr": "Impression de panneaux haute définition avec dégradés photographiques continus sur notre imprimante industrielle Aeon Kyo pour la marque italienne Pinko."
+      }
+    },
+    {
+      "id": "portfolio-tajima-cursive",
+      "title": {
+        "en": "Tajima Micron-Precision Cursive Embroidery on Denim Panels",
+        "fr": "Broderie Cursive Micron sur Toile Denim Bateaux Tajima"
+      },
+      "category": "streetwear",
+      "technique": {
+        "en": "Multi-Head Japanese Embroidery with Optical Laser Alignment",
+        "fr": "Broderie Multi-Têtes Japonaise & Alignement Laser"
+      },
+      "garment": {
+        "en": "Baseball World Series Apparel • Pre-Cut Denim",
+        "fr": "Confection Denim Prêt-à-Porter & Streetwear"
+      },
+      "year": "Production TPE",
+      "image": "/assets/showcase/products/embroidery_macro_stitch.jpg",
+      "macroImage": "/assets/showcase/machines/embroidery_tajima_bay.jpg",
+      "tags": [
+        "Tajima Japon",
+        "Piquage Fin",
+        "Fil Madeira",
+        "5 400 pcs/j"
+      ],
+      "description": {
+        "en": "Ultra-fine typographic cursive script embroidered directly on fabric pieces with high stitch density and perfect edge clarity on Japanese Tajima heads.",
+        "fr": "Typographie cursive ultra-fine brodée sur pièces coupées avec une densité de point optimale et des arêtes nettes grâce à notre parc de brodeuses japonaises Tajima."
+      }
+    },
+    {
+      "id": "portfolio-laser-labels",
+      "title": {
+        "en": "Laser Cutting & Precision Slitting of Branded Woven Labels",
+        "fr": "Découpe Laser & Refendage de Vignettes de Marque"
+      },
+      "category": "badges",
+      "technique": {
+        "en": "Automated CNC Laser Head Slitting with Sealed Edges",
+        "fr": "Découpe Laser Industrielle avec Soudure Thermique"
+      },
+      "garment": {
+        "en": "Brand Woven Labels & Micro-Patches",
+        "fr": "Étiquettes de Col, Vignettes Tissées & Écussons"
+      },
+      "year": "Production TPE",
+      "image": "/assets/showcase/machines/laser_cutting_labels.jpg",
+      "macroImage": "/assets/showcase/machines/cad_prepress_office.jpg",
+      "tags": [
+        "Laser CNC",
+        "Soudure Anti-Effilochage",
+        "Vignettes",
+        "Précision"
+      ],
+      "description": {
+        "en": "High-speed automated laser cutting unit slitting woven and printed brand labels with heat-sealed fray-free edges ready for garment sewing lines.",
+        "fr": "Système laser automatisé à haute cadence découpant les étiquettes de marque avec soudure thermique instantanée des bords, empêchant tout effilochage."
+      }
+    },
+    {
+      "id": "portfolio-brand-moodboard",
+      "title": {
+        "en": "European Fashion House Brand Trims & Reference Archive",
+        "fr": "Archives & Moodboard des Donneurs d'Ordres Européens"
+      },
+      "category": "special",
+      "technique": {
+        "en": "Comprehensive Brand Embellishment & Trims Portfolio",
+        "fr": "Pôle Façonnage Global & Étiquetage Export"
+      },
+      "garment": {
+        "en": "Calvin Klein, Tommy, Teddy Smith, Mustang, Maneven",
+        "fr": "Calvin Klein Jeans, Tommy, Teddy Smith, Mustang, Naf Naf"
+      },
+      "year": "Atelier TPE",
+      "image": "/assets/showcase/products/brand_moodboard_wall.jpg",
+      "macroImage": "/assets/showcase/products/hangtags_tommy_mustang_wood.jpg",
+      "tags": [
+        "Marques Internationales",
+        "Calvin Klein",
+        "Tommy",
+        "Prestige"
+      ],
+      "description": {
+        "en": "Workshop sample wall displaying certified production runs manufactured by TPE in Ras Jebel for major European and American fashion brands.",
+        "fr": "Mur d'échantillonnage de l'atelier TPE à Ras Jebel illustrant les productions confectionnées pour les plus grands donneurs d'ordres de mode internationaux."
+      }
+    }
+  ],
+  "brands": [
+    {
+      "id": "lacoste",
+      "name": "LACOSTE",
+      "logo": "/assets/logos/brands/lacoste.svg",
+      "category": "Sportswear & Polos",
+      "technique": "Sérigraphie pigmentaire & Écussons",
+      "heightClass": "h-7 sm:h-8",
+      "active": true
+    },
+    {
+      "id": "tommy",
+      "name": "TOMMY HILFIGER",
+      "logo": "/assets/logos/brands/tommy_hilfiger.svg",
+      "category": "Premium Denim & Casual",
+      "technique": "Broderie poitrine & Sérigraphie",
+      "heightClass": "h-6 sm:h-7",
+      "active": true
+    },
+    {
+      "id": "calvin-klein",
+      "name": "CALVIN KLEIN",
+      "logo": "/assets/logos/brands/calvin_klein.svg",
+      "category": "Denim & Sous-vêtements",
+      "technique": "Impression discharge & Transfert silicone",
+      "heightClass": "h-5 sm:h-6",
+      "active": true
+    },
+    {
+      "id": "emporio-armani",
+      "name": "EMPORIO ARMANI",
+      "logo": "/assets/logos/brands/emporio_armani.svg",
+      "category": "Haute Confection & Mode",
+      "technique": "Broderie fine & Griffes tissées",
+      "heightClass": "h-6 sm:h-7",
+      "active": true
+    },
+    {
+      "id": "sandro",
+      "name": "SANDRO PARIS",
+      "logo": "/assets/logos/brands/sandro.svg",
+      "category": "Prêt-à-Porter Contemporain",
+      "technique": "Sérigraphie à l'eau & Hang tags",
+      "heightClass": "h-5 sm:h-6",
+      "active": true
+    },
+    {
+      "id": "karl-lagerfeld",
+      "name": "KARL LAGERFELD",
+      "logo": "/assets/logos/brands/karl_lagerfeld.svg",
+      "category": "Design & Maroquinerie",
+      "technique": "Broderie haute densité & Ennoblissement",
+      "heightClass": "h-6 sm:h-7",
+      "active": true
+    },
+    {
+      "id": "american-vintage",
+      "name": "AMERICAN VINTAGE",
+      "logo": "/assets/logos/brands/american_vintage.png",
+      "category": "Maille & Couleurs Végétales",
+      "technique": "Effet délavé vintage & Teinture pièce",
+      "heightClass": "h-6 sm:h-7",
+      "active": true
+    },
+    {
+      "id": "replay",
+      "name": "REPLAY JEANS",
+      "logo": "/assets/logos/brands/replay.svg",
+      "category": "Denim Haute Technologie",
+      "technique": "Sérigraphie rongeant & Broderie 3D",
+      "heightClass": "h-6 sm:h-7",
+      "active": true
+    },
+    {
+      "id": "mustang",
+      "name": "MUSTANG TRUE DENIM",
+      "logo": "/assets/logos/brands/mustang.svg",
+      "category": "Heritage Denim",
+      "technique": "Étiquettes cuir & Broderie poches",
+      "heightClass": "h-6 sm:h-7",
+      "active": true
+    },
+    {
+      "id": "pepe-jeans",
+      "name": "PEPE JEANS LONDON",
+      "logo": "/assets/logos/brands/pepe_jeans.svg",
+      "category": "Denim & Confection",
+      "technique": "Sérigraphie multi-couleurs & Patchs",
+      "heightClass": "h-6 sm:h-7",
+      "active": true
+    },
+    {
+      "id": "pinko",
+      "name": "PINKO",
+      "logo": "/assets/logos/brands/pinko.svg",
+      "category": "Mode Contemporaine Italienne",
+      "technique": "Impression numérique Aeon Kyo",
+      "heightClass": "h-5 sm:h-6",
+      "active": true
+    },
+    {
+      "id": "teddy-smith",
+      "name": "TEDDY SMITH",
+      "logo": "/assets/logos/brands/teddy-smith.svg",
+      "category": "Streetwear & Finitions",
+      "technique": "Sérigraphie gonflante & Transfert",
+      "heightClass": "h-6 sm:h-7",
+      "active": true
+    },
+    {
+      "id": "benetton",
+      "name": "UNITED COLORS OF BENETTON",
+      "logo": "/assets/logos/brands/benetton.svg",
+      "category": "Maille & Casualwear",
+      "technique": "Broderie point de chaînette & Griffes",
+      "heightClass": "h-7 sm:h-8",
+      "active": true
+    },
+    {
+      "id": "lee-cooper",
+      "name": "LEE COOPER",
+      "logo": "/assets/logos/brands/lee-cooper.svg",
+      "category": "Heritage Denim & Workwear",
+      "technique": "Broderie heavy stitch & Écussons tissés",
+      "heightClass": "h-7 sm:h-8",
+      "active": true
+    },
+    {
+      "id": "marc-opolo",
+      "name": "MARC O'POLO",
+      "logo": "/assets/logos/brands/marc_opolo.svg",
+      "category": "Premium Casual Nordic",
+      "technique": "Sérigraphie éco-responsable GOTS",
+      "heightClass": "h-5 sm:h-6",
+      "active": true
+    },
+    {
+      "id": "north-sails",
+      "name": "NORTH SAILS",
+      "logo": "/assets/logos/brands/north_sails.svg",
+      "category": "Performance & Nautique",
+      "technique": "Broderie technique & Badges étanches",
+      "heightClass": "h-6 sm:h-7",
+      "active": true
+    }
+  ],
+  "nearshoringRoutes": [
+    {
+      "id": "route-marseille",
+      "destination": "Marseille / Sud France",
+      "time": "48 Heures",
+      "mode": "Ferry Ro-Ro Quotidien",
+      "port": "Port de Bizerte / Radès vers Grand Port Maritime de Marseille",
+      "customs": "Accord EUR.1 : Dédouanement anticipé en mer, zéro droit de douane",
+      "frequency": "Départs quotidiens réguliers",
+      "badge": "LIAISON N°1 FRANCE"
+    },
+    {
+      "id": "route-genes",
+      "destination": "Gênes / Italie du Nord",
+      "time": "48 Heures",
+      "mode": "Liaison Maritime Ro-Ro Directe",
+      "port": "Port de Radès vers Port de Gênes (Accès direct Lombardie & Piémont)",
+      "customs": "Accord EUR.1 : Entrée directe dans l'espace Schengen sans taxes d'importation",
+      "frequency": "5 départs maritimes par semaine",
+      "badge": "AXE INDUSTRIEL ITALIE"
+    },
+    {
+      "id": "route-barcelone",
+      "destination": "Barcelone / Espagne",
+      "time": "72 Heures",
+      "mode": "Cargo Ligne Régulière",
+      "port": "Port de Radès vers Port de Barcelone (Accès Catalogne & Madrid)",
+      "customs": "Accord EUR.1 : Zéro droit de douane, transit sécurisé par scellé douanier",
+      "frequency": "Liaisons maritimes bi-hebdomadaires",
+      "badge": "CORRIDOR IBÉRIQUE"
+    },
+    {
+      "id": "route-air",
+      "destination": "Paris / Milan / Francfort",
+      "time": "24 Heures",
+      "mode": "Fret Aérien Express Cargo",
+      "port": "Aéroport International de Tunis-Carthage vers Roissy-CDG, Malpensa & Francfort",
+      "customs": "Dédouanement express sous 4h à l'arrivée en aéroport européen",
+      "frequency": "Vols cargo quotidiens multiples",
+      "badge": "PROTOTYPES & CAPSULES EXPRESS"
+    }
+  ],
+  "nearshoringAdvantages": [
+    {
+      "id": "adv-1",
+      "num": "01",
+      "title": {
+        "en": "Zero Customs Duties (EUR.1 Agreement)",
+        "fr": "Zéro Droit de Douane (Accord EUR.1)"
+      },
+      "desc": {
+        "en": "Full duty-free tariff preferences entering European Union territory through bilateral EU-Tunisia trade pacts.",
+        "fr": "Franchise totale de droits de douane pour l'entrée sur le territoire de l'Union Européenne grâce à l'accord d'association Tunisie-UE."
+      }
+    },
+    {
+      "id": "adv-2",
+      "num": "02",
+      "title": {
+        "en": "Rapid 2-Week Restocking Cycles",
+        "fr": "Réassorts Rapides en 2 Semaines"
+      },
+      "desc": {
+        "en": "Cut your supply chain lead times by 75% compared to Asian manufacturing. Replenish European stores in record time.",
+        "fr": "Divisez par 4 vos délais de réapprovisionnement par rapport à l'Asie. Passez de l'échantillon au réassort boutique en un temps record."
+      }
+    },
+    {
+      "id": "adv-3",
+      "num": "03",
+      "title": {
+        "en": "75% Lower Carbon Footprint",
+        "fr": "Empreinte Carbone Réduite de 75%"
+      },
+      "desc": {
+        "en": "Short-distance Mediterranean sea transport drastically reducing Scope 3 greenhouse gas shipping emissions.",
+        "fr": "Circuit court maritime en Méditerranée qui limite massivement les émissions de gaz à effet de serre Scope 3 liées au transport."
+      }
+    },
+    {
+      "id": "adv-4",
+      "num": "04",
+      "title": {
+        "en": "Shared Time Zone (UTC+1 / CET)",
+        "fr": "Même Fuseau Horaire (UTC+1)"
+      },
+      "desc": {
+        "en": "Real-time communication and instantaneous problem-solving with our production managers during your regular office hours.",
+        "fr": "Collaboration fluide et réactivité en temps réel avec nos directeurs d'atelier sans aucun décalage horaire."
+      }
+    }
+  ],
+  "standardsPillars": [
+    {
+      "id": "triple-iso",
+      "tag": "PILLIER 01 • QUALITÉ & RSE",
+      "badge": "TRIPLE ISO",
+      "title": "ISO 9001 • 14001 • 45001",
+      "subtitle": "Management Qualité, Environnement & Santé",
+      "logos": [
+        {
+          "src": "/assets/logos/certifications/iso_9001.svg",
+          "alt": "ISO 9001:2015 Qualité",
+          "hClass": "h-9 sm:h-10"
+        },
+        {
+          "src": "/assets/logos/certifications/iso_14001.svg",
+          "alt": "ISO 14001:2015 Environnement",
+          "hClass": "h-9 sm:h-10"
+        },
+        {
+          "src": "/assets/logos/certifications/iso_45001.png",
+          "alt": "ISO 45001:2018 Sécurité",
+          "hClass": "h-8 sm:h-9"
+        }
+      ],
+      "highlights": [
+        "Traçabilité statistique unitaire zéro défaut",
+        "Filtration et recyclage des eaux de rinçage",
+        "Ateliers climatisés & sécurité de 140+ collaborateurs"
+      ],
+      "auditInfo": "Certifié par organismes accrédités internationaux. Audits annuels."
+    },
+    {
+      "id": "gots-bio",
+      "tag": "PILLIER 02 • FILIÈRE BIOLOGIQUE",
+      "badge": "COTON GOTS",
+      "title": "GOTS (Global Organic)",
+      "subtitle": "Coton Biologique Certifié d'Origine",
+      "logos": [
+        {
+          "src": "/assets/logos/certifications/gots.svg",
+          "alt": "GOTS Global Organic Textile Standard",
+          "hClass": "h-12 sm:h-14"
+        }
+      ],
+      "highlights": [
+        "Homologation ennoblissement sur cotons 100% bio",
+        "Traçabilité sous Transaction Certificate (TC)",
+        "Audit des critères sociaux et environnementaux"
+      ],
+      "auditInfo": "Chaîne de contrôle certifiée de la filature à la finition finale."
+    },
+    {
+      "id": "chimie-recyclage",
+      "tag": "PILLIER 03 • CHIMIE SÛRE & RECYCLÉ",
+      "badge": "SANS PHTALATE",
+      "title": "OEKO-TEX® & GRS",
+      "subtitle": "Chimie Saine & Fibres Recyclées",
+      "logos": [
+        {
+          "src": "/assets/logos/certifications/oeko_tex.svg",
+          "alt": "OEKO-TEX Standard 100",
+          "hClass": "h-11 sm:h-12"
+        },
+        {
+          "src": "/assets/logos/certifications/grs.png",
+          "alt": "GRS Global Recycled Standard",
+          "hClass": "h-9 sm:h-10"
+        }
+      ],
+      "highlights": [
+        "Encres à l'eau sans métaux lourds ni phtalates",
+        "Certification contact direct avec la peau Classe I/II",
+        "Global Recycled Standard pour fils polyester/nylon"
+      ],
+      "auditInfo": "Conformité stricte aux listes RSL des plus grandes marques européennes."
+    },
+    {
+      "id": "accord-eur1",
+      "tag": "PILLIER 04 • DOUANE 0% TAXE",
+      "badge": "ACCORD EUR.1",
+      "title": "Franchise Douanière UE",
+      "subtitle": "Exonération Totale des Droits de Douane",
+      "logos": [
+        {
+          "src": "/assets/logos/certifications/eu_flag.svg",
+          "alt": "Drapeau Union Européenne Accord EUR.1",
+          "hClass": "h-8 sm:h-9"
+        }
+      ],
+      "highlights": [
+        "0% de droits de douane à l'importation dans l'UE",
+        "Statut Entreprise Totalement Exportatrice (Offshore)",
+        "Transit maritime express 48h (Marseille & Gênes)"
+      ],
+      "auditInfo": "Bénéfice immédiat des accords bilatéraux Union Européenne - Tunisie."
+    }
+  ],
+  "contact": {
+    "factoryAddress": "Route de Metline, 7070 Ras Jebel, Gouvernorat de Bizerte, Tunisie",
+    "mapsUrl": "https://www.google.com/maps/place/TPE+TUNISIE/@37.2189777,10.1179318,915m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12e2e98602f32867:0xd2378773985b40ff!8m2!3d37.2189777!4d10.1179318",
+    "phoneStandard": "+216 72 457 143",
+    "phoneWhatsapp": "+216 98 761 003",
+    "whatsappNumberOnly": "21698761003",
+    "emailStandard": "contact@tpe-sa.com",
+    "emailCommercial": "tpe.commercial@topnet.tn",
+    "openingHours": {
+      "en": "Monday – Friday: 07:30 AM – 05:30 PM (Tunis Time / UTC+1)",
+      "fr": "Lundi – Vendredi : 07h30 – 17h30 (Heure de Tunis / UTC+1)"
+    }
+  },
+  "rfqLeads": [
+    {
+      "id": "rfq-1793463990451-sdsn8",
+      "createdAt": "2026-10-31T16:26:30.451Z",
+      "status": "new",
+      "priority": "normal",
+      "companyName": "Waslatn.tn",
+      "contactName": "Amri",
+      "email": "shihebamrii@gmail.com",
+      "phone": "+21653400440",
+      "technique": "Broderie Industrielle Multi-Têtes & Relief 3D",
+      "quantityRange": "Échantillonnage & Capsules (100 – 300 pcs)",
+      "productType": "Sweats à Capuche & Confections Molleton",
+      "targetMarket": "Union Européenne (France, Italie, Allemagne, etc.)",
+      "projectNotes": "00000",
+      "hasTechPack": true,
+      "fileName": "AT4-GPO.pdf",
+      "internalNotes": "",
+      "estimatedQuote": ""
+    }
+  ],
+  "chatbot": {
+    "isEnabled": true,
+    "botName": "Assistant Industriel TPE",
+    "welcomeMessage": {
+      "en": "Hello! I am TPE's Industrial AI Concierge in Ras Jebel. How can I assist you with your textile contract manufacturing or tech-pack RFQ today?",
+      "fr": "Bonjour ! Je suis l'Assistant Industriel TPE à Ras Jebel. Comment puis-je vous accompagner dans votre projet de façonnage textile ou étude de devis ?"
+    },
+    "quickPrompts": {
+      "en": [
+        "🏭 Daily capacities & ROQ/Tajima machines",
+        "🚢 48h shipping to France & Italy (EUR.1)",
+        "📋 Request a Tech-Pack Quotation",
+        "🌿 GOTS & OEKO-TEX Certifications"
+      ],
+      "fr": [
+        "🏭 Capacités & Parc machines ROQ / Tajima",
+        "🚢 Transit maritime 48h & Accord EUR.1",
+        "📋 Configurer une demande de devis",
+        "🌿 Certifications GOTS & OEKO-TEX"
+      ]
+    },
+    "knowledgeBase": [
+      {
+        "id": "kb-capacities",
+        "question": {
+          "en": "What are your daily manufacturing capacities?",
+          "fr": "Quelles sont vos capacités de production journalières ?"
+        },
+        "answer": {
+          "en": "TPE produces 20,300 pieces/day in rotary screen printing (ROQ Oval), 5,400 pieces/day in multi-head embroidery (Tajima Japan), and 132,000 pieces/day in brand trims and hang tags with 140+ skilled operators.",
+          "fr": "TPE produit 20 300 pièces/jour en sérigraphie carrousel ROQ, 5 400 pièces/jour en broderie multi-têtes Tajima, et 132 000 pièces/jour en étiquetage et hang tags avec plus de 140 techniciens."
+        },
+        "tags": [
+          "capacité",
+          "cadence",
+          "volumes",
+          "machines"
+        ]
+      },
+      {
+        "id": "kb-transit",
+        "question": {
+          "en": "How fast is delivery to Europe?",
+          "fr": "Quels sont les délais d'acheminement vers l'Europe ?"
+        },
+        "answer": {
+          "en": "We offer 48-hour door-to-door direct maritime Ro-Ro shipping to Marseille and Genoa, and 24-hour express air cargo from Tunis-Carthage. Under EUR.1 trade agreements, your goods enter the EU with 0% customs duties.",
+          "fr": "Nous assurons des liaisons maritimes directes Ro-Ro en 48 heures vers Marseille et Gênes, et du fret aérien express 24h. Grâce à l'accord EUR.1, vous bénéficiez de 0% de droits de douane dans toute l'Union Européenne."
+        },
+        "tags": [
+          "délai",
+          "livraison",
+          "marseille",
+          "gênes",
+          "eur.1",
+          "douane"
+        ]
+      }
+    ]
+  },
+  "siteSettings": {
+    "siteName": "TPE - Textil Print & Embroider Tunisie",
+    "adminPin": "admin2026",
+    "maintenanceMode": false,
+    "maintenanceMessage": {
+      "en": "Industrial maintenance and system synchronization in progress. Our engineering office remains reachable at contact@tpe-sa.com.",
+      "fr": "Maintenance industrielle et mise à niveau en cours. Notre bureau d'études reste joignable au standard : contact@tpe-sa.com."
+    },
+    "sloganFooter": {
+      "en": "« Creation and innovation are our true calling... »",
+      "fr": "« Création et innovation sont notre vocation... »"
+    },
+    "footerBadge": {
+      "en": "100% Offshore Status • EUR.1 Customs Regime • Triple ISO 9001/14001/45001 • GOTS & GRS Ready",
+      "fr": "Entreprise Totalement Exportatrice • Régime Douanier EUR.1 • Triple ISO 9001/14001/45001 • GOTS & GRS Ready"
+    },
+    "footerDesc": {
+      "en": "Founded in April 2015 in Ras Jebel, TPE is a 100% export enterprise specializing in industrial multi-head embroidery, automated carousel screen printing, and garment labeling for European fashion brands.",
+      "fr": "Fondée en avril 2015 à Ras Jebel, TPE est une entreprise totalement exportatrice spécialisée dans la broderie industrielle, la sérigraphie rotative et l'étiquetage textile pour les marques européennes."
+    }
+  }
+}

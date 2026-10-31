@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ZoomIn, ArrowUpRight } from 'lucide-react';
 import type { Language, PortfolioItem } from '../types';
 import { translations } from '../data/translations';
-import { portfolioData } from '../data/portfolio';
+import { useSiteData } from '../context/SiteContext';
 import { ScrollReveal } from './common/ScrollReveal';
 
 interface PortfolioLookbookProps {
@@ -12,6 +12,7 @@ interface PortfolioLookbookProps {
 
 export const PortfolioLookbook: React.FC<PortfolioLookbookProps> = ({ currentLang, onSelectProject }) => {
   const t = translations[currentLang].lookbook;
+  const { data } = useSiteData();
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
   const filters = [
@@ -23,8 +24,8 @@ export const PortfolioLookbook: React.FC<PortfolioLookbookProps> = ({ currentLan
   ];
 
   const filteredItems = activeFilter === 'all'
-    ? portfolioData
-    : portfolioData.filter((item) => item.category === activeFilter);
+    ? data.portfolio
+    : data.portfolio.filter((item) => item.category === activeFilter);
 
   return (
     <section id="lookbook" className="py-24 bg-[#FAFAFB] border-t border-slate-200">
