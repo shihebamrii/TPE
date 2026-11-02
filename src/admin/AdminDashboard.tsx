@@ -42,6 +42,7 @@ import {
   HelpCircle,
   RefreshCw,
   Loader2,
+  Film,
 } from 'lucide-react';
 import { useSiteData } from '../context/SiteContext';
 import type {
@@ -169,6 +170,149 @@ const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
           <div className="text-[11px] text-slate-300 font-mono truncate flex-1">
             {value}
           </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+interface VideoUploadFieldProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  onUpload: (file: File) => Promise<string>;
+  showToast: (msg: string, type?: 'success' | 'error') => void;
+}
+
+const VideoUploadField: React.FC<VideoUploadFieldProps> = ({
+  label,
+  value,
+  onChange,
+  onUpload,
+  showToast,
+}) => {
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadInfo, setUploadInfo] = useState<string>('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 100 * 1024 * 1024) {
+      showToast('Le fichier vidéo dépasse la limite autorisée de 100 Mo', 'error');
+      return;
+    }
+
+    setIsUploading(true);
+    const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+    setUploadInfo(`Téléversement de ${sizeMb} Mo en cours...`);
+    try {
+      const url = await onUpload(file);
+      onChange(url);
+      showToast(`Vidéo ${file.name} téléversée avec succès`);
+    } catch (err) {
+      console.error(err);
+      showToast('Échec du téléversement de la vidéo', 'error');
+    } finally {
+      setIsUploading(false);
+      setUploadInfo('');
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <label className="block text-xs font-mono text-slate-400">{label}</label>
+        {value && (
+          <span className="text-[10px] font-mono text-tpe-cyan">
+            {value.startsWith('/uploads/') ? '✓ Fichier Hébergé sur le Serveur' : 'URL Statique / Externe'}
+          </span>
+        )}
+      </div>
+
+      <div className="flex items-center gap-2">
+        <div className="relative flex-1">
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder="/hero-video.mp4 ou /uploads/... ou URL HTTPS"
+            className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white font-mono focus:border-tpe-cyan focus:outline-none pr-8"
+          />
+          {value && (
+            <button
+              type="button"
+              onClick={() => onChange('')}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+              title="Effacer"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
+
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="video/mp4,video/webm,video/ogg,video/quicktime"
+          className="hidden"
+          onChange={handleFileChange}
+        />
+
+        <button
+          type="button"
+          disabled={isUploading}
+          onClick={() => fileInputRef.current?.click()}
+          className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-to-r from-tpe-cyan/20 to-blue-600/20 hover:from-tpe-cyan/30 hover:to-blue-600/30 disabled:opacity-50 text-white rounded-xl text-xs font-mono border border-tpe-cyan/40 shrink-0 transition-all font-bold"
+          title="Sélectionner une vidéo MP4 ou WebM depuis votre ordinateur"
+        >
+          {isUploading ? (
+            <>
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-tpe-cyan" />
+              <span>Envoi vidéo...</span>
+            </>
+          ) : (
+            <>
+              <Upload className="w-3.5 h-3.5 text-tpe-cyan" />
+              <span>Uploader Vidéo</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {uploadInfo && (
+        <div className="text-[11px] font-mono text-tpe-cyan flex items-center gap-2 bg-tpe-cyan/10 p-2.5 rounded-lg border border-tpe-cyan/20 animate-pulse">
+          <Loader2 className="w-3.5 h-3.5 animate-spin text-tpe-cyan" />
+          <span>{uploadInfo}</span>
+        </div>
+      )}
+
+      {/* Video Preview */}
+      {value && (
+        <div className="bg-slate-950/80 rounded-xl p-3 border border-slate-800 space-y-2">
+          <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
+            <span className="flex items-center gap-1.5 text-white font-bold">
+              <Film className="w-3.5 h-3.5 text-tpe-cyan" />
+              Aperçu Vidéo en Direct :
+            </span>
+            <span className="truncate max-w-[240px] text-[11px] text-slate-400">{value}</span>
+          </div>
+
+          <div className="relative aspect-video w-full max-w-sm rounded-lg overflow-hidden border border-slate-800 bg-black">
+            <video
+              key={value}
+              src={value}
+              controls
+              playsInline
+              muted
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <p className="text-[10px] text-slate-500 font-mono">
+            💡 Astuce : Privilégiez un format MP4 H.264 (720p ou 1080p, 15-30 secondes en boucle) pour un affichage ultra-fluide.
+          </p>
         </div>
       )}
     </div>
@@ -1060,25 +1204,25 @@ export const AdminDashboard: React.FC = () => {
                 </div>
               </div>
 
-              {/* Video URL */}
+              {/* Video Cinématique avec Upload */}
               <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
-                <h3 className="text-sm font-bold text-white uppercase font-mono tracking-wider">
-                  Vidéo Cinématique d'Arrière-Plan
-                </h3>
-                <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1">
-                    Chemin ou URL du fichier MP4
-                  </label>
-                  <input
-                    type="text"
-                    value={heroForm.videoUrl}
-                    onChange={(e) => setHeroForm({ ...heroForm, videoUrl: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white font-mono"
-                  />
-                  <p className="text-[11px] text-slate-500 mt-1">
-                    Par défaut : <code className="text-tpe-cyan">/hero-video.mp4</code>. Vous pouvez aussi renseigner une URL HTTPS externe.
-                  </p>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-bold text-white uppercase font-mono tracking-wider flex items-center gap-2">
+                    <Film className="w-4 h-4 text-tpe-cyan" />
+                    <span>Vidéo Cinématique d'Arrière-Plan</span>
+                  </h3>
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+                    Fond du Hero 4K / HD
+                  </span>
                 </div>
+
+                <VideoUploadField
+                  label="Fichier Vidéo (MP4 / WebM / QuickTime)"
+                  value={heroForm.videoUrl}
+                  onChange={(url) => setHeroForm({ ...heroForm, videoUrl: url })}
+                  onUpload={uploadFile}
+                  showToast={showToast}
+                />
               </div>
 
               {/* Editorial Titles FR / EN */}

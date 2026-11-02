@@ -60,6 +60,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ }) => {
           muted
           playsInline
           key={heroData.videoUrl}
+          src={heroData.videoUrl || "/hero-video.mp4"}
           className="w-full h-full object-cover object-center scale-[1.03] opacity-80"
         >
           <source src={heroData.videoUrl || "/hero-video.mp4"} type="video/mp4" />

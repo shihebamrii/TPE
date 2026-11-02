@@ -44,7 +44,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 30 * 1024 * 1024 }, // 30 MB max
+  limits: { fileSize: 100 * 1024 * 1024 }, // 100 MB max for high-def videos and tech-packs
 });
 
 // Initialize database
