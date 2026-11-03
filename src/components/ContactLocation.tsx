@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExternalLink, ArrowUpRight, Phone, Mail, MapPin, Clock, MessageSquare } from 'lucide-react';
-import type { Language } from '../types';
+import type { Language, ContactSettings } from '../types';
 import { translations } from '../data/translations';
 import { useSiteData } from '../context/SiteContext';
 import { ScrollReveal } from './common/ScrollReveal';
@@ -8,12 +8,13 @@ import { ScrollReveal } from './common/ScrollReveal';
 interface ContactLocationProps {
   currentLang: Language;
   onOpenRFQ: () => void;
+  overrideContact?: ContactSettings;
 }
 
-export const ContactLocation: React.FC<ContactLocationProps> = ({ currentLang, onOpenRFQ }) => {
+export const ContactLocation: React.FC<ContactLocationProps> = ({ currentLang, onOpenRFQ, overrideContact }) => {
   const t = translations[currentLang].contact;
   const { data } = useSiteData();
-  const contact = data.contact;
+  const contact = overrideContact || data.contact;
 
   return (
     <section id="contact" className="py-24 bg-[#FAFAFB] border-t border-slate-200">

@@ -1,18 +1,19 @@
 import React, { useRef, useState } from 'react';
 import { ArrowDown, ArrowUpRight, Volume2, VolumeX, Play, Pause } from 'lucide-react';
-import type { Language } from '../types';
+import type { Language, HeroSettings } from '../types';
 import { translations } from '../data/translations';
 import { useSiteData } from '../context/SiteContext';
 
 interface HeroProps {
   currentLang: Language;
   onOpenRFQ: () => void;
+  overrideHero?: HeroSettings;
 }
 
-export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ }) => {
+export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenRFQ, overrideHero }) => {
   const t = translations[currentLang].hero;
   const { data } = useSiteData();
-  const heroData = data.hero;
+  const heroData = overrideHero || data.hero;
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);

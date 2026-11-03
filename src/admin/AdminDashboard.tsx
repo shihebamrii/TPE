@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   LayoutDashboard,
   Inbox,
@@ -43,8 +43,20 @@ import {
   RefreshCw,
   Loader2,
   Film,
+  Monitor,
+  Smartphone,
+  Tablet,
 } from 'lucide-react';
 import { useSiteData } from '../context/SiteContext';
+import { Hero } from '../components/Hero';
+import { TechniquesMatrix } from '../components/TechniquesMatrix';
+import { FactoryTour } from '../components/FactoryTour';
+import { PortfolioLookbook } from '../components/PortfolioLookbook';
+import { ClientReferences } from '../components/ClientReferences';
+import { NearshoringMap } from '../components/NearshoringMap';
+import { EcoQualityStandards } from '../components/EcoQualityStandards';
+import { ContactLocation } from '../components/ContactLocation';
+import { AIChatBot } from '../components/AIChatBot';
 import type {
   TechniqueItem,
   FactoryMachine,
@@ -385,10 +397,207 @@ export const AdminDashboard: React.FC = () => {
   const [langTab, setLangTab] = useState<Language>('fr');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // Preview System State
+  const [previewModal, setPreviewModal] = useState<{
+    isOpen: boolean;
+    section:
+      | 'hero'
+      | 'techniques'
+      | 'machines'
+      | 'portfolio'
+      | 'brands'
+      | 'nearshoring'
+      | 'standards'
+      | 'contact'
+      | 'chatbot'
+      | 'full';
+    device: 'desktop' | 'tablet' | 'mobile';
+    lang: Language;
+  }>({
+    isOpen: false,
+    section: 'hero',
+    device: 'desktop',
+    lang: 'fr',
+  });
+
+  const openPreview = (
+    section?:
+      | 'hero'
+      | 'techniques'
+      | 'machines'
+      | 'portfolio'
+      | 'brands'
+      | 'nearshoring'
+      | 'standards'
+      | 'contact'
+      | 'chatbot'
+      | 'full'
+  ) => {
+    const defaultSection =
+      section ||
+      (activeTab === 'hero'
+        ? 'hero'
+        : activeTab === 'techniques'
+        ? 'techniques'
+        : activeTab === 'machines'
+        ? 'machines'
+        : activeTab === 'portfolio'
+        ? 'portfolio'
+        : activeTab === 'brands'
+        ? 'brands'
+        : activeTab === 'nearshoring'
+        ? 'nearshoring'
+        : activeTab === 'standards'
+        ? 'standards'
+        : activeTab === 'contact'
+        ? 'contact'
+        : activeTab === 'chatbot'
+        ? 'chatbot'
+        : 'full');
+
+    setPreviewModal({
+      isOpen: true,
+      section: defaultSection,
+      device: 'desktop',
+      lang: langTab,
+    });
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && previewModal.isOpen) {
+        setPreviewModal((prev) => ({ ...prev, isOpen: false }));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [previewModal.isOpen]);
+
   // Notification Toast Helper
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  // Preview Section Renderer Helper
+  const renderPreviewSection = (
+    section:
+      | 'hero'
+      | 'techniques'
+      | 'machines'
+      | 'portfolio'
+      | 'brands'
+      | 'nearshoring'
+      | 'standards'
+      | 'contact'
+      | 'chatbot'
+      | 'full',
+    lang: Language
+  ) => {
+    switch (section) {
+      case 'hero':
+        return (
+          <Hero
+            currentLang={lang}
+            onOpenRFQ={() => showToast('Simulation ouverture devis')}
+            overrideHero={heroForm}
+          />
+        );
+      case 'techniques':
+        return (
+          <TechniquesMatrix
+            currentLang={lang}
+            onSelectMacro={() => {}}
+            onSelectRFQTechnique={() => showToast('Technique sélectionnée pour devis')}
+          />
+        );
+      case 'machines':
+        return (
+          <FactoryTour
+            currentLang={lang}
+            onSelectPhoto={() => {}}
+          />
+        );
+      case 'portfolio':
+        return (
+          <PortfolioLookbook
+            currentLang={lang}
+            onSelectProject={() => {}}
+          />
+        );
+      case 'brands':
+        return <ClientReferences currentLang={lang} />;
+      case 'nearshoring':
+        return <NearshoringMap currentLang={lang} />;
+      case 'standards':
+        return <EcoQualityStandards currentLang={lang} />;
+      case 'contact':
+        return (
+          <ContactLocation
+            currentLang={lang}
+            onOpenRFQ={() => showToast('Simulation ouverture devis')}
+            overrideContact={contactForm}
+          />
+        );
+      case 'chatbot':
+        return (
+          <div className="min-h-[550px] p-6 relative flex flex-col items-center justify-center bg-slate-950/90 text-center">
+            <div className="max-w-md space-y-4 mb-8">
+              <div className="w-12 h-12 rounded-2xl bg-tpe-magenta/20 border border-tpe-magenta/30 flex items-center justify-center mx-auto text-tpe-magenta">
+                <Bot className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-black text-white uppercase tracking-tight">
+                Simulation Assistant IA Concierge
+              </h3>
+              <p className="text-xs text-slate-400">
+                Le concierge IA ci-dessous est ouvert et actif avec votre base FAQ ({data.chatbot.knowledgeBase?.length || 0} réponses) et vos suggestions personnalisées ({(data.chatbot.quickPrompts?.[lang] || []).length} raccourcis).
+              </p>
+            </div>
+            <AIChatBot
+              currentLang={lang}
+              onOpenRFQ={() => showToast('Simulation ouverture devis')}
+              defaultOpen={true}
+            />
+          </div>
+        );
+      case 'full':
+      default:
+        return (
+          <div className="space-y-0">
+            <Hero
+              currentLang={lang}
+              onOpenRFQ={() => showToast('Simulation ouverture devis')}
+              overrideHero={heroForm}
+            />
+            <ClientReferences currentLang={lang} />
+            <TechniquesMatrix
+              currentLang={lang}
+              onSelectMacro={() => {}}
+              onSelectRFQTechnique={() => showToast('Technique sélectionnée pour devis')}
+            />
+            <FactoryTour
+              currentLang={lang}
+              onSelectPhoto={() => {}}
+            />
+            <PortfolioLookbook
+              currentLang={lang}
+              onSelectProject={() => {}}
+            />
+            <NearshoringMap currentLang={lang} />
+            <EcoQualityStandards currentLang={lang} />
+            <ContactLocation
+              currentLang={lang}
+              onOpenRFQ={() => showToast('Simulation ouverture devis')}
+              overrideContact={contactForm}
+            />
+            <AIChatBot
+              currentLang={lang}
+              onOpenRFQ={() => showToast('Simulation ouverture devis')}
+              defaultOpen={false}
+            />
+          </div>
+        );
+    }
   };
 
   // RFQ Leads CRM States
@@ -615,13 +824,23 @@ export const AdminDashboard: React.FC = () => {
             <span>Sauvegarde</span>
           </button>
 
+          {/* Quick Live Preview Modal Trigger */}
+          <button
+            onClick={() => openPreview()}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-tpe-cyan/20 to-blue-600/20 hover:from-tpe-cyan/30 hover:to-blue-600/30 text-white text-xs font-bold border border-tpe-cyan/40 transition-all shadow-sm group"
+            title="Prévisualiser la section active en direct"
+          >
+            <Eye className="w-4 h-4 text-tpe-cyan group-hover:scale-110 transition-transform" />
+            <span className="hidden sm:inline">Aperçu en Direct</span>
+          </button>
+
           {/* Switch to Public Site */}
           <button
             onClick={() => setViewMode('public')}
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-medium border border-slate-700 transition-all"
           >
-            <Eye className="w-4 h-4 text-tpe-cyan" />
-            <span className="hidden sm:inline">Voir le Site Public</span>
+            <ExternalLink className="w-4 h-4 text-slate-400" />
+            <span className="hidden sm:inline">Site Public</span>
           </button>
 
           {/* Logout */}
@@ -725,6 +944,15 @@ export const AdminDashboard: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <button
+                    onClick={() => openPreview('full')}
+                    className="px-4 py-2 bg-gradient-to-r from-tpe-cyan/20 to-blue-600/20 hover:from-tpe-cyan/30 hover:to-blue-600/30 text-white text-xs font-bold font-mono rounded-xl transition-all flex items-center gap-1.5 border border-tpe-cyan/40"
+                    title="Prévisualiser le site complet"
+                  >
+                    <Eye className="w-4 h-4 text-tpe-cyan" />
+                    <span>Aperçu Site Complet</span>
+                  </button>
+
+                  <button
                     onClick={() => setActiveTab('leads')}
                     className="px-4 py-2 bg-tpe-magenta hover:bg-tpe-magenta/90 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1.5"
                   >
@@ -780,6 +1008,57 @@ export const AdminDashboard: React.FC = () => {
                     </span>
                     <span className="text-xs font-mono text-slate-400">Partenaires</span>
                   </div>
+                </div>
+              </div>
+
+              {/* Centre de Prévisualisation Visuelle en Direct */}
+              <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <h3 className="text-sm font-bold text-white uppercase font-mono tracking-wider flex items-center gap-2">
+                      <Eye className="w-4 h-4 text-tpe-cyan" />
+                      <span>Centre de Prévisualisation en Direct</span>
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-0.5">
+                      Vérifiez instantanément le rendu de chaque section sur Ordinateur, Tablette et Mobile sans quitter le dashboard.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => openPreview('full')}
+                    className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-mono font-bold border border-slate-700 transition-all flex items-center gap-1.5 self-start sm:self-auto"
+                  >
+                    <Monitor className="w-3.5 h-3.5 text-tpe-cyan" />
+                    <span>Aperçu Page Entière</span>
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 pt-1">
+                  {[
+                    { id: 'hero', label: 'Hero & Vidéo', icon: Film, color: 'text-tpe-magenta' },
+                    { id: 'techniques', label: 'Savoir-Faire', icon: Layers, color: 'text-tpe-cyan' },
+                    { id: 'machines', label: 'Parc Machines', icon: Cpu, color: 'text-tpe-yellow' },
+                    { id: 'portfolio', label: 'Lookbook', icon: Image, color: 'text-emerald-400' },
+                    { id: 'brands', label: 'Marques Clientes', icon: Tag, color: 'text-rose-400' },
+                    { id: 'nearshoring', label: 'Nearshoring 48h', icon: Navigation, color: 'text-blue-400' },
+                    { id: 'standards', label: 'Normes & RSE', icon: ShieldCheck, color: 'text-emerald-300' },
+                    { id: 'contact', label: 'Contact & Usine', icon: Phone, color: 'text-amber-400' },
+                    { id: 'chatbot', label: 'Assistant IA', icon: Bot, color: 'text-purple-400' },
+                  ].map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => openPreview(item.id as any)}
+                        className="flex items-center gap-2 p-2.5 bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 rounded-xl text-left transition-all group"
+                      >
+                        <Icon className={`w-4 h-4 ${item.color} group-hover:scale-110 transition-transform shrink-0`} />
+                        <span className="text-xs text-slate-200 group-hover:text-white font-medium truncate">
+                          {item.label}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -1160,16 +1439,28 @@ export const AdminDashboard: React.FC = () => {
                     Modifiez les titres principaux, le bandeau défilant, la vidéo d'arrière-plan et les chiffres clés.
                   </p>
                 </div>
-                <button
-                  onClick={() => {
-                    updateHero(heroForm);
-                    showToast('Hero et bandeau enregistrés avec succès');
-                  }}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-600/25"
-                >
-                  <Save className="w-4 h-4" />
-                  <span>Enregistrer les Modifications</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openPreview('hero')}
+                    className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold rounded-xl transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm"
+                    title="Prévisualiser le Hero avec vos modifications en direct"
+                  >
+                    <Eye className="w-4 h-4 text-tpe-cyan" />
+                    <span>Prévisualiser</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      updateHero(heroForm);
+                      showToast('Hero et bandeau enregistrés avec succès');
+                    }}
+                    className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-600/25"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>Enregistrer</span>
+                  </button>
+                </div>
               </div>
 
               {/* Live Status Switcher */}
@@ -1527,9 +1818,20 @@ export const AdminDashboard: React.FC = () => {
                     Ajoutez, modifiez ou réorganisez les procédés textiles affichés dans la matrice interactive.
                   </p>
                 </div>
-                <button
-                  onClick={() => {
-                    setEditingTechnique({
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openPreview('techniques')}
+                    className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold rounded-xl transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm"
+                    title="Prévisualiser la section Savoir-Faire"
+                  >
+                    <Eye className="w-4 h-4 text-tpe-cyan" />
+                    <span>Prévisualiser</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setEditingTechnique({
                       id: `tech-${Date.now()}`,
                       category: 'screenprint',
                       title: { fr: 'Nouveau Savoir-Faire', en: 'New Expertise' },
@@ -1561,6 +1863,7 @@ export const AdminDashboard: React.FC = () => {
                   <span>Ajouter une Technique</span>
                 </button>
               </div>
+            </div>
 
               {/* Grid of Techniques */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1677,8 +1980,19 @@ export const AdminDashboard: React.FC = () => {
                     Gérez la flotte de machines industrielles (ROQ, Tajima, Aeon Kyo, Laser, etc.) et leurs points interactifs.
                   </p>
                 </div>
-                <button
-                  onClick={() => {
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openPreview('machines')}
+                    className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold rounded-xl transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm"
+                    title="Prévisualiser le Parc Machines"
+                  >
+                    <Eye className="w-4 h-4 text-tpe-yellow" />
+                    <span>Prévisualiser</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
                     setEditingMachine({
                       id: `machine-${Date.now()}`,
                       title: { fr: 'Nouveau Poste Industriel', en: 'New Industrial Workstation' },
@@ -1704,6 +2018,7 @@ export const AdminDashboard: React.FC = () => {
                   <Plus className="w-4 h-4" />
                   <span>Ajouter une Machine</span>
                 </button>
+                </div>
               </div>
 
               {/* Machines List */}
@@ -1816,30 +2131,42 @@ export const AdminDashboard: React.FC = () => {
                     Gérez les photographies haute résolution des productions réelles pour les marques partenaires.
                   </p>
                 </div>
-                <button
-                  onClick={() => {
-                    setEditingPortfolio({
-                      id: `portfolio-${Date.now()}`,
-                      title: { fr: 'Nouvelle Pièce d\'Atelier', en: 'New Garment Piece' },
-                      category: 'fashion',
-                      technique: { fr: 'Broderie 3D & Sérigraphie', en: '3D Embroidery & Screenprint' },
-                      garment: { fr: 'Sweats & Denim Export', en: 'Sweatshirts & Export Denim' },
-                      year: 'Production TPE 2026',
-                      image: '/assets/showcase/products/hangtags_replay_pantone.jpg',
-                      macroImage: '/assets/showcase/products/hangtags_table_replay_teddy.jpg',
-                      tags: ['Collection 2026', 'Éco-Responsable'],
-                      description: {
-                        fr: 'Finitions soignées réalisées dans les ateliers TPE de Ras Jebel.',
-                        en: 'High-precision craftsmanship executed at TPE workshops in Ras Jebel.',
-                      },
-                    });
-                    setIsNewPortfolio(true);
-                  }}
-                  className="px-4 py-2 bg-tpe-cyan text-slate-950 font-black text-xs rounded-xl hover:bg-tpe-cyan/90 transition-all flex items-center gap-1.5"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Ajouter une Réalisation</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openPreview('portfolio')}
+                    className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold rounded-xl transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm"
+                    title="Prévisualiser le Lookbook Réalisations"
+                  >
+                    <Eye className="w-4 h-4 text-tpe-cyan" />
+                    <span>Prévisualiser</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setEditingPortfolio({
+                        id: `portfolio-${Date.now()}`,
+                        title: { fr: 'Nouvelle Pièce d\'Atelier', en: 'New Garment Piece' },
+                        category: 'fashion',
+                        technique: { fr: 'Broderie 3D & Sérigraphie', en: '3D Embroidery & Screenprint' },
+                        garment: { fr: 'Sweats & Denim Export', en: 'Sweatshirts & Export Denim' },
+                        year: 'Production TPE 2026',
+                        image: '/assets/showcase/products/hangtags_replay_pantone.jpg',
+                        macroImage: '/assets/showcase/products/hangtags_table_replay_teddy.jpg',
+                        tags: ['Collection 2026', 'Éco-Responsable'],
+                        description: {
+                          fr: 'Finitions soignées réalisées dans les ateliers TPE de Ras Jebel.',
+                          en: 'High-precision craftsmanship executed at TPE workshops in Ras Jebel.',
+                        },
+                      });
+                      setIsNewPortfolio(true);
+                    }}
+                    className="px-4 py-2 bg-tpe-cyan text-slate-950 font-black text-xs rounded-xl hover:bg-tpe-cyan/90 transition-all flex items-center gap-1.5"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Ajouter une Réalisation</span>
+                  </button>
+                </div>
               </div>
 
               {/* Portfolio Grid */}
@@ -1928,23 +2255,35 @@ export const AdminDashboard: React.FC = () => {
                     Gérez la liste et les logos des maisons de mode européennes qui confient leur confection à TPE.
                   </p>
                 </div>
-                <button
-                  onClick={() => {
-                    setEditingBrand({
-                      id: `brand-${Date.now()}`,
-                      name: 'NOUVELLE MARQUE',
-                      logo: '/assets/logos/brands/lacoste.svg',
-                      category: 'Prêt-à-Porter Européen',
-                      technique: 'Sérigraphie & Broderie',
-                      active: true,
-                    });
-                    setIsNewBrand(true);
-                  }}
-                  className="px-4 py-2 bg-tpe-magenta hover:bg-tpe-magenta/90 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1.5"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Ajouter une Marque</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openPreview('brands')}
+                    className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold rounded-xl transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm"
+                    title="Prévisualiser les Références Marques"
+                  >
+                    <Eye className="w-4 h-4 text-tpe-magenta" />
+                    <span>Prévisualiser</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setEditingBrand({
+                        id: `brand-${Date.now()}`,
+                        name: 'NOUVELLE MARQUE',
+                        logo: '/assets/logos/brands/lacoste.svg',
+                        category: 'Prêt-à-Porter Européen',
+                        technique: 'Sérigraphie & Broderie',
+                        active: true,
+                      });
+                      setIsNewBrand(true);
+                    }}
+                    className="px-4 py-2 bg-tpe-magenta hover:bg-tpe-magenta/90 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1.5"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Ajouter une Marque</span>
+                  </button>
+                </div>
               </div>
 
               {/* Brands Grid */}
@@ -2031,25 +2370,37 @@ export const AdminDashboard: React.FC = () => {
                     Paramétrez les liaisons maritimes directes 48h (Marseille, Gênes, Barcelone) et les avantages douaniers EUR.1.
                   </p>
                 </div>
-                <button
-                  onClick={() => {
-                    setEditingRoute({
-                      id: `route-${Date.now()}`,
-                      destination: 'Nouvelle Destination Europe',
-                      time: '48 Heures',
-                      mode: 'Ferry Ro-Ro Quotidien',
-                      port: 'Port de Radès vers Port Européen',
-                      customs: 'Accord EUR.1 : 0% droit de douane',
-                      frequency: 'Départs réguliers',
-                      badge: 'LIAISON EXPRESS',
-                    });
-                    setIsNewRoute(true);
-                  }}
-                  className="px-3.5 py-2 bg-tpe-cyan text-slate-950 font-black text-xs rounded-xl hover:bg-tpe-cyan/90 transition-all flex items-center gap-1.5"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Ajouter une Route</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openPreview('nearshoring')}
+                    className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold rounded-xl transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm"
+                    title="Prévisualiser la Carte Nearshoring"
+                  >
+                    <Eye className="w-4 h-4 text-tpe-cyan" />
+                    <span>Prévisualiser</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setEditingRoute({
+                        id: `route-${Date.now()}`,
+                        destination: 'Nouvelle Destination Europe',
+                        time: '48 Heures',
+                        mode: 'Ferry Ro-Ro Quotidien',
+                        port: 'Port de Radès vers Port Européen',
+                        customs: 'Accord EUR.1 : 0% droit de douane',
+                        frequency: 'Départs réguliers',
+                        badge: 'LIAISON EXPRESS',
+                      });
+                      setIsNewRoute(true);
+                    }}
+                    className="px-3.5 py-2 bg-tpe-cyan text-slate-950 font-black text-xs rounded-xl hover:bg-tpe-cyan/90 transition-all flex items-center gap-1.5"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Ajouter une Route</span>
+                  </button>
+                </div>
               </div>
 
               {/* Routes List */}
@@ -2149,6 +2500,15 @@ export const AdminDashboard: React.FC = () => {
                     Gérez les accréditations ISO 9001/14001/45001, GOTS Bio, OEKO-TEX et accords douaniers EUR.1.
                   </p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => openPreview('standards')}
+                  className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold rounded-xl transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm"
+                  title="Prévisualiser les Normes & RSE"
+                >
+                  <Eye className="w-4 h-4 text-emerald-400" />
+                  <span>Prévisualiser</span>
+                </button>
               </div>
 
               {/* Pillars List */}
@@ -2212,16 +2572,28 @@ export const AdminDashboard: React.FC = () => {
                     Gérez l'adresse physique à Ras Jebel, les numéros de standard, WhatsApp et courriels.
                   </p>
                 </div>
-                <button
-                  onClick={() => {
-                    updateContact(contactForm);
-                    showToast('Coordonnées enregistrées avec succès');
-                  }}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-2"
-                >
-                  <Save className="w-4 h-4" />
-                  <span>Enregistrer</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openPreview('contact')}
+                    className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold rounded-xl transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm"
+                    title="Prévisualiser les Coordonnées & Contact"
+                  >
+                    <Eye className="w-4 h-4 text-tpe-magenta" />
+                    <span>Prévisualiser</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      updateContact(contactForm);
+                      showToast('Coordonnées enregistrées avec succès');
+                    }}
+                    className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-2"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>Enregistrer</span>
+                  </button>
+                </div>
               </div>
 
               <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
@@ -2336,16 +2708,28 @@ export const AdminDashboard: React.FC = () => {
                     Configurez le comportement du bot de messagerie, les suggestions rapides et sa base de connaissances.
                   </p>
                 </div>
-                <button
-                  onClick={() => {
-                    updateChatbot(chatbotForm);
-                    showToast('Paramètres du bot enregistrés');
-                  }}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-2"
-                >
-                  <Save className="w-4 h-4" />
-                  <span>Enregistrer</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openPreview('chatbot')}
+                    className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold rounded-xl transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm"
+                    title="Tester et Prévisualiser le Concierge IA"
+                  >
+                    <Eye className="w-4 h-4 text-tpe-magenta" />
+                    <span>Tester le Bot</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      updateChatbot(chatbotForm);
+                      showToast('Paramètres du bot enregistrés');
+                    }}
+                    className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-2"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>Enregistrer</span>
+                  </button>
+                </div>
               </div>
 
               {/* Bot status */}
@@ -3479,6 +3863,259 @@ export const AdminDashboard: React.FC = () => {
                 <span>Enregistrer</span>
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================== */}
+      {/* LIVE IN-DASHBOARD SECTION & FULL-SITE PREVIEW MODAL            */}
+      {/* ============================================================== */}
+      {previewModal.isOpen && (
+        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col animate-in fade-in duration-200">
+          {/* Top Control Bar */}
+          <div className="bg-slate-900/90 border-b border-slate-800 px-4 py-3 flex flex-wrap items-center justify-between gap-3 flex-shrink-0 z-10 shadow-lg">
+            {/* Left: Section Selector */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-black uppercase tracking-wider text-white flex items-center gap-1.5">
+                  <Eye className="w-4 h-4 text-tpe-cyan" />
+                  <span>Aperçu en Direct</span>
+                </span>
+              </div>
+
+              <div className="h-4 w-px bg-slate-800 hidden sm:block" />
+
+              <div className="flex items-center gap-1.5">
+                <label className="text-[11px] font-mono text-slate-400 hidden md:inline">Section :</label>
+                <select
+                  value={previewModal.section}
+                  onChange={(e) =>
+                    setPreviewModal((prev) => ({
+                      ...prev,
+                      section: e.target.value as any,
+                    }))
+                  }
+                  className="bg-slate-950 border border-slate-700 text-white text-xs font-mono rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-tpe-cyan cursor-pointer"
+                >
+                  <option value="full">🌐 Site Public Complet</option>
+                  <option value="hero">⚡ Hero & Bandeau Marquee</option>
+                  <option value="techniques">🔬 Savoir-Faire (Matrice)</option>
+                  <option value="machines">⚙️ Parc Machines (Atelier)</option>
+                  <option value="portfolio">📸 Lookbook Réalisations</option>
+                  <option value="brands">🏷️ Références Marques</option>
+                  <option value="nearshoring">🚢 Nearshoring & Logistique</option>
+                  <option value="standards">🛡️ Normes, Chimie & RSE</option>
+                  <option value="contact">📍 Coordonnées & Usine</option>
+                  <option value="chatbot">🤖 Concierge IA (Chatbot)</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Center: Device Viewport Switcher */}
+            <div className="flex items-center gap-2 bg-slate-950/80 p-1 rounded-xl border border-slate-800">
+              <button
+                type="button"
+                onClick={() => setPreviewModal((prev) => ({ ...prev, device: 'desktop' }))}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 transition-all ${
+                  previewModal.device === 'desktop'
+                    ? 'bg-tpe-cyan text-slate-950 shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="Affichage Ordinateur (Plein Écran)"
+              >
+                <Monitor className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Desktop</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setPreviewModal((prev) => ({ ...prev, device: 'tablet' }))}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 transition-all ${
+                  previewModal.device === 'tablet'
+                    ? 'bg-tpe-yellow text-slate-950 shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="Affichage Tablette (768px)"
+              >
+                <Tablet className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Tablette (768px)</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setPreviewModal((prev) => ({ ...prev, device: 'mobile' }))}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 transition-all ${
+                  previewModal.device === 'mobile'
+                    ? 'bg-tpe-magenta text-white shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="Affichage Mobile (390px)"
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Mobile (390px)</span>
+              </button>
+            </div>
+
+            {/* Right: Language Switcher, Draft Save & Close */}
+            <div className="flex items-center gap-2">
+              {/* Language Switch */}
+              <div className="flex items-center bg-slate-950 rounded-lg p-0.5 border border-slate-800 text-xs font-mono">
+                <button
+                  type="button"
+                  onClick={() => setPreviewModal((prev) => ({ ...prev, lang: 'fr' }))}
+                  className={`px-2 py-1 rounded font-bold transition-colors ${
+                    previewModal.lang === 'fr'
+                      ? 'bg-tpe-cyan text-slate-950'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  FR
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPreviewModal((prev) => ({ ...prev, lang: 'en' }))}
+                  className={`px-2 py-1 rounded font-bold transition-colors ${
+                    previewModal.lang === 'en'
+                      ? 'bg-tpe-cyan text-slate-950'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  EN
+                </button>
+              </div>
+
+              {/* Quick Save for drafts if on hero or contact */}
+              {previewModal.section === 'hero' && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateHero(heroForm);
+                    showToast('Modifications du Hero enregistrées avec succès');
+                  }}
+                  className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-mono font-bold flex items-center gap-1 shadow-sm transition-colors"
+                  title="Enregistrer les modifications en cours"
+                >
+                  <Save className="w-3.5 h-3.5" />
+                  <span className="hidden md:inline">Enregistrer le Hero</span>
+                </button>
+              )}
+
+              {previewModal.section === 'contact' && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateContact(contactForm);
+                    showToast('Coordonnées enregistrées avec succès');
+                  }}
+                  className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-mono font-bold flex items-center gap-1 shadow-sm transition-colors"
+                  title="Enregistrer les coordonnées en cours"
+                >
+                  <Save className="w-3.5 h-3.5" />
+                  <span className="hidden md:inline">Enregistrer Contact</span>
+                </button>
+              )}
+
+              {/* Live Public Site link */}
+              <button
+                type="button"
+                onClick={() => setViewMode('public')}
+                className="p-1.5 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+                title="Aller sur le site public réel"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </button>
+
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setPreviewModal((prev) => ({ ...prev, isOpen: false }))}
+                className="p-1.5 text-slate-400 hover:text-white bg-slate-800 hover:bg-rose-600/80 rounded-lg transition-colors flex items-center gap-1"
+                title="Fermer la prévisualisation (Échap)"
+              >
+                <X className="w-4 h-4" />
+                <span className="text-[10px] font-mono hidden lg:inline">Échap</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Viewport Workspace */}
+          <div className="flex-1 overflow-auto bg-slate-950/95 flex justify-center items-start p-2 sm:p-6">
+            {/* DESKTOP VIEWPORT */}
+            {previewModal.device === 'desktop' && (
+              <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+                {/* Simulated Desktop Browser Chrome */}
+                <div className="bg-slate-950 border-b border-slate-800 px-4 py-2 flex items-center justify-between text-xs font-mono text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-rose-500 inline-block" />
+                    <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" />
+                    <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
+                  </div>
+                  <div className="flex items-center gap-2 bg-slate-900 px-4 py-1 rounded-full border border-slate-800 text-[11px] text-slate-300">
+                    <Lock className="w-3 h-3 text-emerald-400" />
+                    <span>https://tpe-factory.com</span>
+                    <span className="text-slate-600">/</span>
+                    <span className="text-tpe-cyan font-bold">{previewModal.section}</span>
+                  </div>
+                  <div className="text-[11px] text-slate-500">100% Largeur Plein Écran</div>
+                </div>
+
+                {/* Desktop Content Canvas */}
+                <div className="relative bg-tpe-navy text-slate-100 overflow-x-hidden min-h-[500px]">
+                  {renderPreviewSection(previewModal.section, previewModal.lang)}
+                </div>
+              </div>
+            )}
+
+            {/* TABLET VIEWPORT (768px iPad Chassis) */}
+            {previewModal.device === 'tablet' && (
+              <div className="w-[768px] my-4 rounded-[36px] border-[12px] border-slate-800 bg-slate-900 shadow-2xl overflow-hidden flex flex-col flex-shrink-0">
+                {/* Tablet Top Frame */}
+                <div className="bg-slate-950 h-8 flex items-center justify-center relative border-b border-slate-800 px-4">
+                  <div className="w-3 h-3 rounded-full bg-slate-800 border border-slate-700" />
+                  <div className="absolute right-4 text-[10px] font-mono text-slate-500">
+                    iPad (768 x 1024)
+                  </div>
+                </div>
+
+                {/* Tablet Scrollable Canvas */}
+                <div className="relative bg-tpe-navy text-slate-100 overflow-y-auto max-h-[80vh] min-h-[600px]">
+                  {renderPreviewSection(previewModal.section, previewModal.lang)}
+                </div>
+
+                {/* Tablet Bottom Frame */}
+                <div className="bg-slate-950 h-6 flex items-center justify-center border-t border-slate-800">
+                  <div className="w-28 h-1 bg-slate-700 rounded-full" />
+                </div>
+              </div>
+            )}
+
+            {/* MOBILE VIEWPORT (390px iPhone Chassis) */}
+            {previewModal.device === 'mobile' && (
+              <div className="w-[390px] my-4 rounded-[44px] border-[10px] border-slate-800 bg-slate-900 shadow-2xl overflow-hidden flex flex-col flex-shrink-0">
+                {/* Mobile Top Frame & Dynamic Island */}
+                <div className="bg-slate-950 h-10 flex items-center justify-between px-6 border-b border-slate-800 text-[11px] font-mono text-slate-400">
+                  <span>09:41</span>
+                  <div className="w-24 h-5 bg-black rounded-full flex items-center justify-center border border-slate-800">
+                    <div className="w-2.5 h-2.5 rounded-full bg-slate-900" />
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px]">
+                    <span>5G</span>
+                    <span>100%</span>
+                  </div>
+                </div>
+
+                {/* Mobile Scrollable Canvas */}
+                <div className="relative bg-tpe-navy text-slate-100 overflow-y-auto max-h-[75vh] min-h-[580px]">
+                  {renderPreviewSection(previewModal.section, previewModal.lang)}
+                </div>
+
+                {/* Mobile Bottom Frame */}
+                <div className="bg-slate-950 h-7 flex items-center justify-center border-t border-slate-800">
+                  <div className="w-32 h-1 bg-slate-600 rounded-full" />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -23,6 +23,7 @@ import { useSiteData } from '../context/SiteContext';
 interface AIChatBotProps {
   currentLang: Language;
   onOpenRFQ: () => void;
+  defaultOpen?: boolean;
 }
 
 interface ChatMessage {
@@ -37,7 +38,7 @@ interface ChatMessage {
   }>;
 }
 
-export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) => {
+export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ, defaultOpen = false }) => {
   const { data } = useSiteData();
   const chatbotSettings = data.chatbot;
   const contact = data.contact;
@@ -46,7 +47,13 @@ export const AIChatBot: React.FC<AIChatBotProps> = ({ currentLang, onOpenRFQ }) 
     return null;
   }
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  useEffect(() => {
+    if (defaultOpen) {
+      setIsOpen(true);
+    }
+  }, [defaultOpen]);
   const [isExpanded, setIsExpanded] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [hasUnreadPrompt, setHasUnreadPrompt] = useState(true);
